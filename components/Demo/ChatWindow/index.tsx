@@ -16,7 +16,7 @@ export default function ExperChatWindow() {
     ])
   }
   return (
-    <div className="flex flex-col h-full rounded-xl shadow-md shadow-gray">
+    <div className="flex flex-col h-full rounded-xl shadow-md shadow-gray dark:border-primary border-2 bg-white dark:bg-black">
       <ChatTitle />
       <MessageWindow messages={messages} windowRef={windowRef} topRef={windowTopRef} />
       <Footer addUserMessage={addUserMessage} />

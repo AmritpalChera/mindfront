@@ -10,10 +10,9 @@ function classNames(...classes) {
 export default function TabSelect({ activeTab, setActiveTab }) {
   
   const tabs = [
-    { name: 'Plain Text', href: '#', icon: AiFillFile, current: activeTab === 0 },
-    { name: 'PDF Doc', href: '#', icon: AiFillFilePdf, current: activeTab === 1 },
-    { name: 'Webpage', href: '#', icon: TbWorld, current: activeTab === 2 },
-    { name: 'Mixed', href: '#', icon: AiFillStar, current: activeTab === 3 },
+    { name: 'Text', href: '#', icon: AiFillFile, current: activeTab === 0 },
+    { name: 'Webpage', href: '#', icon: TbWorld, current: activeTab === 1 },
+    { name: 'Audio', href: '#', icon: AiFillStar, current: activeTab === 2 },
   ]
 
   return (

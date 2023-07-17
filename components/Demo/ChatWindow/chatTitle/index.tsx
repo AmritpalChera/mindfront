@@ -22,7 +22,7 @@ const ChatTitle = () => {
   }
 
   return (
-    <div className="chat-header px-3 py-1 flex flex-row flex-none justify-between items-center shadow">
+    <div className="chat-header px-3 py-1 flex flex-row flex-none justify-between items-center shadow dark:border-b-2">
       <div className="flex items-center">
         
         <div className="flex ml-2">

@@ -6,7 +6,8 @@ import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import { useState } from "react";
 import { Provider } from "react-redux";
 import store from "@/redux/store";
-
+import Startup from "./startup";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export function Providers({ children }: any) {
@@ -14,6 +15,7 @@ export function Providers({ children }: any) {
   return (
     <SessionContextProvider supabaseClient={supabaseClient}>
       <Provider store={store}>
+        <Startup />
         <ThemeProvider attribute="class" enableSystem={true} defaultTheme="light">
               {children}
           </ThemeProvider>

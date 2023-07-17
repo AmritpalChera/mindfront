@@ -1,12 +1,12 @@
-
+" use client";
 import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import {
   Bars3Icon,
   CalendarIcon,
-  ChartPieIcon,
+  CommandLineIcon,
   DocumentDuplicateIcon,
-  FolderIcon,
+  ChatBubbleBottomCenterIcon,
   HomeIcon,
   UsersIcon,
   XMarkIcon,
@@ -14,6 +14,8 @@ import {
 import Link from 'next/link';
 import Image from 'next/image';
 import ThemeToggler from '../Header/ThemeToggler';
+import { useRouter } from 'next/navigation';
+import Logo from '../Logo';
 
 
 
@@ -21,21 +23,24 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Navbar({activeTab, setActiveTab}) {
+export default function Navbar({activeTab}) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const router = useRouter();
+
+  const setActiveTab = (tabId) => {
+    router.push(`/${tabId}`)
+  }
 
   const navigation = [
     { name: 'Dashboard', id: 'dashboard', icon: HomeIcon, current: activeTab === 'dashboard' },
-    { name: 'Team', id: 'team', icon: UsersIcon, current: activeTab === 'team' },
-    { name: 'Projects', id: 'projects', icon: FolderIcon, current: activeTab === 'projects' },
-    { name: 'Calendar', id: 'calender', icon: CalendarIcon, current: activeTab === 'calender' },
-    { name: 'Documents', id: 'documents', icon: DocumentDuplicateIcon, current: activeTab === 'documents' },
-    { name: 'Reports', id: 'reports', icon: ChartPieIcon, current: activeTab === 'reports' },
+    { name: 'API', id: 'api', icon: ChatBubbleBottomCenterIcon, current: activeTab === 'api' },
+    { name: 'New Upload', id: 'new', icon: DocumentDuplicateIcon, current: activeTab === 'new' },
+    { name: 'Profile', id: 'profile', icon: UsersIcon, current: activeTab === 'profile' },
   ]
   const teams = [
-    { id: '1', name: 'Heroicons', href: '#', initial: 'H', current: activeTab === '1' },
-    { id: '2', name: 'Tailwind Labs', href: '#', initial: 'T', current: activeTab === '2' },
-    { id: '3', name: 'Workcation', href: '#', initial: 'W', current: activeTab === '3'  },
+    { id: '1', name: 'Customer Support', href: '#', initial: 'C', current: activeTab === '1' },
+    { id: '2', name: 'Twitter', href: '#', initial: 'T', current: activeTab === '2' },
+    { id: '3', name: 'Discord', href: '#', initial: 'D', current: activeTab === '3'  },
   ]
 
   
@@ -89,20 +94,7 @@ export default function Navbar({activeTab, setActiveTab}) {
                         href="/"
                         className={`header-logo block w-full`}
                       >
-                        <Image
-                          src="/images/logo/logo-2.svg"
-                          alt="logo"
-                          width={140}
-                          height={30}
-                          className="dark:hidden"
-                        />
-                        <Image
-                          src="/images/logo/logo.svg"
-                          alt="logo"
-                          width={140}
-                          height={30}
-                          className="hidden dark:block"
-                        />
+                        <Logo />
                     </Link>
                       <ThemeToggler />
                       <div className="flex w-16 justify-center">
@@ -129,7 +121,7 @@ export default function Navbar({activeTab, setActiveTab}) {
                                 >
                                   <item.icon
                                     className={classNames(
-                                      item.current ? 'text-primary' : 'text-white group-hover:text-primary',
+                                      item.current ? 'text-primary' : ' group-hover:text-primary',
                                       'h-6 w-6 shrink-0'
                                     )}
                                     aria-hidden="true"
@@ -158,7 +150,7 @@ export default function Navbar({activeTab, setActiveTab}) {
                                     className={classNames(
                                       team.current
                                         ? 'text-indigo-600 border-indigo-600'
-                                        : 'text-white border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600',
+                                        : ' border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600',
                                       'flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium'
                                     )}
                                   >
@@ -222,7 +214,7 @@ export default function Navbar({activeTab, setActiveTab}) {
                         >
                           <item.icon
                             className={classNames(
-                              item.current ? 'text-indigo-600' : 'text-white group-hover:text-indigo-600',
+                              item.current ? 'text-indigo-600' : ' group-hover:text-indigo-600',
                               'h-6 w-6 shrink-0'
                             )}
                             aria-hidden="true"
@@ -251,7 +243,7 @@ export default function Navbar({activeTab, setActiveTab}) {
                             className={classNames(
                               team.current
                                 ? 'text-indigo-600 border-indigo-600'
-                                : 'text-white border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600',
+                                : ' border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600',
                               'flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium'
                             )}
                           >

@@ -28,7 +28,7 @@ const Hero = () => {
                   Virtual Brain API
                 </h1>
                 <p className="mb-12 text-base font-medium !leading-relaxed text-secondary dark:text-white dark:opacity-90 sm:text-xl md:text-2xl">
-                  Upload any pdf, text or even a webpage url. We'll train a brain for you to interface with!
+                  Upload any text or even a webpage url. We'll train a brain for you to interface with!
                 </p>
                 <div className="flex flex-col justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
                   <div
