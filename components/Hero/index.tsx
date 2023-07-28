@@ -15,7 +15,6 @@ const Hero = () => {
   return (
     <>
       <section
-        id="home"
         className="relative z-10 overflow-hidden pt-[120px] pb-16 md:pt-[150px] md:pb-[120px] xl:pt-[180px] xl:pb-[160px] 2xl:pt-[210px] 2xl:pb-[200px]"
       >
         <div className="container">
@@ -25,7 +24,7 @@ const Hero = () => {
                 className="wow fadeInUp mx-auto pb-12 pt-20"
                 data-wow-delay=".2s"
               >
-                <p className="lg:text-6xl text-3xl pb-4 text-primary">Make it smart 🧠</p>
+                <p className="xl:text-6xl lg:text-5xl text-3xl pb-4 text-primary">Make it smart 🧠</p>
                 <h1 className="mb-5 text-6xl xl:text-9xl md:text-8xl font-semibold leading-tight text-secondary dark:text-white sm:leading-tight  md:leading-tight">
                   Virtual Brain Interface
                 </h1>

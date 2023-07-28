@@ -59,8 +59,7 @@ const SigninPage = () => {
     dispatch(setUserData({ ...user }));
     
     setEmail('');
-    setPassword('')
-    window.location = '/dashboard';
+    setPassword('');
   }
 
   if (!user.loaded) {

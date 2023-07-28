@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       
-      <body className={`h-full`}>
+      <body className="h-full">
         <Providers>
           <ToastContainer autoClose={3000} />
           {children}
