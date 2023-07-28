@@ -92,7 +92,7 @@ const SigninPage = () => {
                   </div>
                 </form>
                 {error && <p className="text-red font-bold text-center my-3">{error}</p>}
-                {checkEmail && <p onClick={()=>setCheckEmail(false)} className="text-primary text-center my-3 cursor-pointer">Didn't get an email? Retry</p>}
+                {checkEmail && <p onClick={()=>setCheckEmail(false)} className="text-primary text-center my-3 cursor-pointer">Didn&apos;t get an email? Retry</p>}
 
                 <p className="text-center text-base font-medium text-body-color">
                  
