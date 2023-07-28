@@ -13,11 +13,25 @@ interface PriceboxTypes {
   children: React.ReactNode,
   subscribed?: boolean,
   featured?: boolean,
-  description?: string
+  description?: string,
+  planType: string
 }
 
+const plans = {
+  starter: {
+    name: 'Starter',
+    color: 'bg-green-500',
+    textColor: 'text-green-500'
+  },
+  custom: {
+    name: 'Custom',
+    color: 'bg-purple-500',
+    textColor: 'text-purple-500'
+  }
+};
+
 const PricingBox = (props: PriceboxTypes) => {
-  const { price, duration, packageName, subtitle, disabled, children, subscribed, featured, description } = props;
+  const { price, duration, packageName, subtitle, disabled, children, subscribed, featured, description, planType } = props;
 
   const user = useSelector(selectUser);
   const router = useRouter();
@@ -38,15 +52,15 @@ const PricingBox = (props: PriceboxTypes) => {
   const featuredText = featured ? 'text-white dark:text-dark' : 'text-dark dark:text-white';
 
   return (
-    <div className="w-full h-[500px]">
+    <div className="w-full max-w-sm h-[550px] min-w-[300px]">
      
       <div 
-        className={`wow fadeInUp h-[550px] relative z-10 rounded-xl shadow-md overflow-hidden  shadow-gray-300 ${featured? 'border-2 bg-dark dark:bg-white ': 'border-2 bg-white dark:bg-dark border-gray'}`}
+        className={`wow fadeInUp h-[550px] relative z-10 border rounded-xl shadow-sm overflow-hidden  shadow-gray-300 ${featured? ' bg-dark dark:bg-white ': ' bg-white dark:bg-dark border-gray'}`}
         data-wow-delay=".1s"
       >
-        <div className="h-4 bg-purple-500 w-full"></div>
+        <div className={`h-4 ${plans[planType].color} w-full`}></div>
         <div className="px-8 py-10">
-          <div className="mb-1 font-medium text-purple-500">Starter</div>
+          <div className={`mb-1 font-medium ${plans[planType].textColor}`}>{plans[planType].name}</div>
           <div className="flex items-center justify-between">
             <h3 className={`price mb-2 text-3xl font-bold ${featuredText}`}>
               $<span className="amount">{price}</span>

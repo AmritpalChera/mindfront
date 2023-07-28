@@ -63,7 +63,7 @@ export default function ApiFeatures() {
   }
 
   return (
-    <div className="">
+    <div className="w-full flex justify-center  pb-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:text-center">
           <h2 className="text-base font-semibold leading-7 text-indigo-600">Make it smart</h2>
@@ -74,7 +74,7 @@ export default function ApiFeatures() {
             We take care of the technical so you can deliver quality.
           </p>
         </div>
-        <div className='mt-12'>
+        <div className='mt-12 w-full'>
           {apiKeyRender()}
           <div>
 

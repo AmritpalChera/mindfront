@@ -7,6 +7,7 @@ import SectionTitle from "../Common/SectionTitle";
 import OfferList from "./OfferList";
 import PricingBox from "./PricingBox";
 import Navbar from "../Navbar";
+import Link from "next/link";
 
 const Pricing = () => {
   const [isMonthly, setIsMonthly] = useState(true);
@@ -36,52 +37,57 @@ const Pricing = () => {
           width="665px"
         />
 
-        <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
+        <div className="flex gap-4 flex-wrap justify-center">
           <PricingBox
             packageName="Lite"
             price={isMonthly ? "0" : "0"}
             duration={isMonthly ? "mo" : "yr"}
             subtitle="For small scale projects"
             subscribed={subscription}
+            planType="starter"
           >
             <OfferList text="1 project" status="active" />
             <OfferList text="300 vectors total" status="active" />
             <OfferList text="Email support" status="active" />
             <OfferList text="Discord channel" status="active" />
-            <OfferList text="Test with chatbot" status="inactive" />
+            <OfferList text="Test with chatbot" status="active" />
           </PricingBox>
           <PricingBox
             packageName="Basic"
-            price={isMonthly ? "20" : "150"}
+            price={isMonthly ? "30" : "150"}
             duration={isMonthly ? "mo" : "yr"}
             subtitle="For medium scale projects"
             subscribed={subscription}
-            
+            planType="starter"
           >
             <OfferList text="10 projects" status="active" />
-            <OfferList text="10000 vectors total" status="active" />
+            <OfferList text="3000 vectors total" status="active" />
             <OfferList text="Email support" status="active" />
             <OfferList text="Discord channel" status="active" />
             <OfferList text="Test with chatbot" status="active" />
           </PricingBox>
           <PricingBox
-            packageName="Custom"
-            price={isMonthly ? "10" : "700"}
-            duration={isMonthly ? "mo" : "yr"}
-            subtitle="Requires $70 one-time fee"
+            packageName="One-time"
+            price={isMonthly ? "300" : "700"}
+            duration={isMonthly ? "" : ""}
+            subtitle="Must bring your own keys"
             disabled={false}
             subscribed={subscription}
             description="Get full control of your data by bringing your own keys!"
             featured={true}
+            planType="custom"
           >
             <OfferList text="Unlimited Projects" status="active" />
             <OfferList text="100,000+ vectors" status="active" />
-            <OfferList text="Commercial Use" status="active" />
             <OfferList text="Bring your own keys" status="active" />
             <OfferList text="Email Support" status="active" />
-            <OfferList text="Discord Channel" status="active" />
+            <OfferList text="Direct founder access" status="active" />
           </PricingBox>
         </div>
+      </div>
+      <div className="w-full flex flex-col items-center mt-12">
+        <div className="text-xl text-primary font-bold">Need more?</div>
+        <Link target="blank" href="https://twitter.com/AwesomAmri" className="mt-4 underline">Contact Amritpal on Twitter</Link>
       </div>
 
       <div className="absolute left-0 bottom-0 z-[-1]">
