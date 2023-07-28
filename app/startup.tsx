@@ -45,7 +45,6 @@ const Startup = ({children}: StartupProps) => {
     const session = await supabase.auth.getSession();
     const customer = await supabase.from('customers').select().single();
     const user: any = session?.data?.session?.user;
-    console.log('user is: ', user)
     const apiKey = user?.id && await getAPIToken(user?.id);
 
     dispatch(setUserData({ ...user, loaded: true, isCustomer: !!(customer?.data?.amount), apiKey }));
