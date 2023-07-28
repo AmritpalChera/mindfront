@@ -54,7 +54,7 @@ const Hero = () => {
               </div>
               
             </div>
-            <div className="flex justify-center w-full xl:w-fit rounded-2xl">
+            <div className="flex justify-center w-full lg:w-fit rounded-2xl">
               {/* <img className="rounded-2xl" src="https://image.lexica.art/full_jpg/6305ff28-b610-4f50-966e-8b6a7277e7cb" width={500} height={500} /> */}
               <Image
                 src="/images/landingpage/brain1.jpg"
