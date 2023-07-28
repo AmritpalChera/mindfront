@@ -60,7 +60,7 @@ const SigninPage = () => {
     
     setEmail('');
     setPassword('')
-    router.push('/dashboard')
+    window.location = '/dashboard';
   }
 
   if (!user.loaded) {

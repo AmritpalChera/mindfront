@@ -16,24 +16,28 @@ interface StartupProps {
 const Startup = ({children}: StartupProps) => {
 
   const user = useSelector(selectUser);
-  const [apiKey, setApiKey] = useState('');
   const router = useRouter();
   const dispatch = useDispatch();
   const location = usePathname();
   const [loading, setLoading] = useState(!publicPaths.includes(location));
 
   const getAPIToken = async (userId: string) => {
-    const tokenData = await supabase.from('keys').select().eq('userId', userId).single();
+    const tokenData = await supabase.from('keys').select('mindplugKey').eq('userId', userId).single();
     if (tokenData.error) {
       // could not create or get token
       console.log("could not create or get token", tokenData.error);
-      const newTokenData = await supabase.from('keys').upsert({ userId: userId }).select().single();
-      setApiKey('done')
-      dispatch(setUserData({apiKey: (newTokenData.data?.mindplugKey)}))
+      const newTokenData = await supabase.from('keys').upsert({ userId: userId }).select('mindplugKey').single();
+      if (newTokenData.error) {
+        console.log('could not create new token', newTokenData.error)
+      }
+      console.log('dispatching data')
+      dispatch(setUserData({apiKey: newTokenData.data?.mindplugKey}))
+      return (newTokenData.data?.mindplugKey);
 
     } else {
-      setApiKey('done');
-      dispatch(setUserData({apiKey: (tokenData.data?.mindplugKey)}))
+      console.log('dispatching data')
+      dispatch(setUserData({apiKey: tokenData.data?.mindplugKey}))
+      return (tokenData.data.mindplugKey)
     }
   }
 
@@ -42,9 +46,9 @@ const Startup = ({children}: StartupProps) => {
     const customer = await supabase.from('customers').select().single();
     const user: any = session?.data?.session?.user;
     console.log('user is: ', user)
+    const apiKey = user?.id && await getAPIToken(user?.id);
 
-
-    dispatch(setUserData({ ...user, loaded: true, isCustomer: !!(customer?.data?.amount) }));
+    dispatch(setUserData({ ...user, loaded: true, isCustomer: !!(customer?.data?.amount), apiKey }));
     const redirect = localStorage.getItem('signinRedirect');
     setLoading(false);
     if (redirect) {
@@ -65,12 +69,15 @@ const Startup = ({children}: StartupProps) => {
   useEffect(() => {
     if (publicPaths.includes(location)) setLoading(false);
     userSession1();
-  }, [supabase, router]);
+  }, []);
 
   useEffect(() => {
-    if (user?.id && !apiKey) getAPIToken(user.id); 
-  }, [user])
- 
+    if (user.id && !user.apiKey) {
+      console.log('I am running')
+      getAPIToken(user.id)
+    }
+  }, [user, location])
+
 
   return (
     <div>
