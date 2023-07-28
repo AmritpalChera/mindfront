@@ -5,7 +5,6 @@ const key = process.env.NEXT_PUBLIC_BACKEND_KEY;
 
 const env = process.env.NODE_ENV;
 
-
 const backend = axios.create({
     baseURL: env==="development" ? "http://localhost:3001/api" : 'https://backend.experai.com/api',
     headers: {

@@ -1,13 +1,17 @@
 /** @type {import('tailwindcss').Config} */
+
+const colors = require('tailwindcss/colors')
+
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
+    "./atoms/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: "class",
   theme: {
-    
+
     extend: {
       boxShadow: {
         signUp: "0px 5px 10px rgba(4, 10, 34, 0.2)",
@@ -21,6 +25,7 @@ module.exports = {
         '128': '46rem'
       },
       colors: {
+        
         current: "currentColor",
         transparent: "transparent",
         secondary: "#090E34",
@@ -30,6 +35,7 @@ module.exports = {
         "body-color": "#959CB1",
         red: '#EB4335',
       },
+      
       container: {
         center: true,
         padding: "1rem",

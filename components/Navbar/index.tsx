@@ -10,6 +10,8 @@ import {
   HomeIcon,
   UsersIcon,
   XMarkIcon,
+  CreditCardIcon,
+  Square3Stack3DIcon,
 } from '@heroicons/react/24/outline'
 import Link from 'next/link';
 import Image from 'next/image';
@@ -36,6 +38,8 @@ export default function Navbar({activeTab}) {
     { name: 'API', id: 'api', icon: ChatBubbleBottomCenterIcon, current: activeTab === 'api' },
     { name: 'New Upload', id: 'new', icon: DocumentDuplicateIcon, current: activeTab === 'new' },
     { name: 'Profile', id: 'profile', icon: UsersIcon, current: activeTab === 'profile' },
+    { name: 'Pricing', id: 'pricing', icon: CreditCardIcon, current: activeTab === 'pricing' },
+    { name: 'Setup Guide', id: 'guide', icon: Square3Stack3DIcon, current: activeTab === 'guide' },
   ]
   const teams = [
     { id: '1', name: 'Customer Support', href: '#', initial: 'C', current: activeTab === '1' },
@@ -257,16 +261,18 @@ export default function Navbar({activeTab}) {
                 </li>
                 <li className="-mx-6 mt-auto">
                   <a
-                    href="#"
-                    className="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50"
+                  href="https://twitter.com/AwesomAmri"
+                  target='blank'
+                    className="flex relative items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50"
                   >
                     <img
                       className="h-8 w-8 rounded-full bg-gray-50"
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      src="https://i.ibb.co/94mwSx1/f9c5-IOx-W-400x400.jpg"
                       alt=""
-                    />
+                  />
+                  <span className='absolute top-0 left-11'>🟢</span>
                     <span className="sr-only">Your profile</span>
-                    <span aria-hidden="true">Tom Cook</span>
+                    <span aria-hidden="true">Amritpal</span>
                   </a>
                 </li>
               </ul>
@@ -279,12 +285,13 @@ export default function Navbar({activeTab}) {
             <span className="sr-only">Open sidebar</span>
             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
           </button>
-          <div className="flex-1 text-sm font-semibold leading-6 text-gray-900">Dashboard</div>
-          <a href="#">
-            <span className="sr-only">Your profile</span>
+          <div className="flex-1  text-sm font-semibold leading-6 text-gray-900">Dashboard</div>
+          <a className='relative' href="https://twitter.com/AwesomAmri" target='blank'>
+            <span className="sr-only">Amritpal</span>
+            <span className='absolute -top-2 left-6'>🟢</span>
             <img
               className="h-8 w-8 rounded-full bg-gray-50"
-              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+              src="https://i.ibb.co/94mwSx1/f9c5-IOx-W-400x400.jpg"
               alt=""
             />
           </a>

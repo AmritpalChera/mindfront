@@ -15,10 +15,11 @@ export function Providers({ children }: any) {
   return (
     <SessionContextProvider supabaseClient={supabaseClient}>
       <Provider store={store}>
-        <Startup />
-        <ThemeProvider attribute="class" enableSystem={true} defaultTheme="light">
-              {children}
+        <Startup>
+          <ThemeProvider attribute="class" enableSystem={true} defaultTheme="light">
+                {children}
           </ThemeProvider>
+        </Startup>
         </Provider>
     </SessionContextProvider>
     

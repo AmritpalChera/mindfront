@@ -1,16 +1,16 @@
-import Breadcrumb from "@/components/Common/Breadcrumb";
 // import Contact from "@/components/Contact";
+"use client";
+import Navbar from "@/components/Navbar";
 import Pricing from "@/components/Pricing";
 
 const ContactPage = () => {
   return (
     <>
-      <Breadcrumb
-        pageName="Pricing Page"
-        description=""
-      />
-
-      <Pricing/>
+      <Navbar activeTab={'pricing'} />
+      <main className="lg:pl-72">
+        <Pricing/>
+      </main>
+      
     </>
   );
 };

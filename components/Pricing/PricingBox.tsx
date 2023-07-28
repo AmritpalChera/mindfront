@@ -4,8 +4,20 @@ import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
-const PricingBox = (props: any) => {
-  const { price, duration, packageName, subtitle, disabled, children, subscribed, featured } = props;
+interface PriceboxTypes {
+  price: string,
+  duration?: string,
+  packageName: string,
+  subtitle?: string,
+  disabled?: boolean,
+  children: React.ReactNode,
+  subscribed?: boolean,
+  featured?: boolean,
+  description?: string
+}
+
+const PricingBox = (props: PriceboxTypes) => {
+  const { price, duration, packageName, subtitle, disabled, children, subscribed, featured, description } = props;
 
   const user = useSelector(selectUser);
   const router = useRouter();
@@ -23,31 +35,41 @@ const PricingBox = (props: any) => {
     }
   };
 
+  const featuredText = featured ? 'text-white dark:text-dark' : 'text-dark dark:text-white';
+
   return (
-    <div className="w-full">
-      <div
-        className={`wow fadeInUp relative z-10 rounded-xl bg-white px-8 py-10 shadow-md shadow-gray dark:bg-[#1D2144]   ${featured? 'border-2 border-gray shadow-xl': 'border-2 border-gray'}`}
+    <div className="w-full h-[500px]">
+     
+      <div 
+        className={`wow fadeInUp h-[550px] relative z-10 rounded-xl shadow-md overflow-hidden  shadow-gray-300 ${featured? 'border-2 bg-dark dark:bg-white ': 'border-2 bg-white dark:bg-dark border-gray'}`}
         data-wow-delay=".1s"
       >
-        <div className="flex items-center justify-between">
-          <h3 className="price mb-2 text-3xl font-bold text-black dark:text-white">
-            $<span className="amount">{price}</span>
-            <span className="time text-body-color">/{duration}</span>
-          </h3>
-          <h4 className="mb-2 text-xl font-bold text-secondary dark:text-white">
-            {packageName}
-          </h4>
+        <div className="h-4 bg-purple-500 w-full"></div>
+        <div className="px-8 py-10">
+          <div className="mb-1 font-medium text-purple-500">Starter</div>
+          <div className="flex items-center justify-between">
+            <h3 className={`price mb-2 text-3xl font-bold ${featuredText}`}>
+              $<span className="amount">{price}</span>
+              <span className="time text-body-color">/{duration}</span>
+            </h3>
+            <h4 className={`mb-2 text-xl font-bold ${featuredText}`}>
+              {packageName}
+            </h4>
+          </div>
+          <p className="mb-4 text-base text-gray-400">{subtitle}</p>
+          <div className=" border-b border-body-color border-opacity-10 pb-8 dark:border-white dark:border-opacity-10">
+            <button
+              disabled={disabled}
+              onClick={handleButtonClick}
+              className="flex w-full items-center disabled:bg-gray justify-center rounded-md bg-primary p-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
+              {disabled? 'Coming Soon' : user.email? subscribed? 'Manage Subscription' : (price==='0')? 'Current plan' : 'Get Started' : 'Sign in'}
+            </button>
+          </div>
+          <div className={`mb-4 ${featuredText}`}>
+            { description }
+          </div>
+          <div className={`${featuredText}`}>{children}</div>
         </div>
-        <p className="mb-7 text-base text-body-color">{subtitle}</p>
-        <div className="mb-8 border-b border-body-color border-opacity-10 pb-8 dark:border-white dark:border-opacity-10">
-          <button
-            disabled={disabled}
-            onClick={handleButtonClick}
-            className="flex w-full items-center disabled:bg-gray justify-center rounded-md bg-primary p-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
-            {disabled? 'Coming Soon' : user.email? subscribed? 'Manage Subscription' : (price==='0')? 'Current plan' : 'Get Started' : 'Sign in'}
-          </button>
-        </div>
-        <div>{children}</div>
       </div>
     </div>
   );

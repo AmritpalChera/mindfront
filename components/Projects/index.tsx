@@ -1,10 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SectionTitle from "../Common/SectionTitle";
 import ProjectsGrid from "./ProjectsGrid";
 import Stats from "./Stats";
+import Collections from "./Collections";
+import { useSearchParams } from "next/navigation";
 
 export default function Projects() {
-  const [activeCollection, setActiveCollection] = useState('');
+  const params = useSearchParams();
+  const [activeProject, setActiveProject] = useState(params.get('project') || '');
+
+  useEffect(() => {
+    const project = params.get('project');
+    console.log('project is: ', project)
+    setActiveProject(project || '');
+  }, [params])
 
   const projects = () => {
     return (
@@ -12,27 +21,17 @@ export default function Projects() {
         <SectionTitle title="Projects" />
         <Stats />
         <div className="mt-12">
-          <ProjectsGrid setActiveCollection={setActiveCollection} />
+          <ProjectsGrid />
         </div>
         
       </div>
     )
   };
 
-  const collections = () => {
-    return (
-      <div>
-        <SectionTitle title={`Collections > ${activeCollection}`} />
-        <div onClick={()=>setActiveCollection('')} className="mt-12 text-primary underline cursor-pointer">
-          Return Home
-        </div>
-        
-      </div>
-    )
-  }
+  const collections = () => <Collections activeProject={activeProject} />
 
 
   return (
-   activeCollection? collections() : projects()
+   activeProject? collections() : projects()
   )
 }
