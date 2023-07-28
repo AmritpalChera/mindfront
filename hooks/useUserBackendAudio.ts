@@ -9,7 +9,7 @@ export default function useUserBackendAudio () {
   
   function genUserBackend () {
     return axios.create({
-      baseURL: env==="development" ? "http://localhost:3001/api" : 'https://backend.experai.com/api',
+      baseURL: env==="development" ? "http://localhost:3001/api" : 'https://connect.mindplug.io/api',
       headers: {
         "Content-Type": "audio/mp3",
         "Authorization": `Bearer ${apiKey}`,
