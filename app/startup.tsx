@@ -1,13 +1,13 @@
 "use client";
 
 import federateUserBackend from '@/hooks/useUserBackend';
-import { setUserData } from '@/redux/features/UserSlice';
+import { selectUser, setUserData } from '@/redux/features/UserSlice';
 import { publicPaths } from '@/utils/app/paths';
 import supabase from '@/utils/supabaseClient';
 
 import { useRouter, usePathname } from 'next/navigation';
 import { ReactNode, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 interface StartupProps {
   children: ReactNode
@@ -15,6 +15,8 @@ interface StartupProps {
 
 const Startup = ({children}: StartupProps) => {
 
+  const user = useSelector(selectUser);
+  const [apiKey, setApiKey] = useState('');
   const router = useRouter();
   const dispatch = useDispatch();
   const location = usePathname();
@@ -26,10 +28,12 @@ const Startup = ({children}: StartupProps) => {
       // could not create or get token
       console.log("could not create or get token", tokenData.error);
       const newTokenData = await supabase.from('keys').upsert({ userId: userId }).select().single();
-      return (newTokenData.data?.mindplugKey);
+      setApiKey('done')
+      dispatch(setUserData({apiKey: (newTokenData.data?.mindplugKey)}))
 
     } else {
-      return (tokenData.data.mindplugKey)
+      setApiKey('done');
+      dispatch(setUserData({apiKey: (tokenData.data?.mindplugKey)}))
     }
   }
 
@@ -37,16 +41,17 @@ const Startup = ({children}: StartupProps) => {
     const session = await supabase.auth.getSession();
     const customer = await supabase.from('customers').select().single();
     const user: any = session?.data?.session?.user;
-    const apiKey = user?.id && await getAPIToken(user?.id);
+    console.log('user is: ', user)
 
-    dispatch(setUserData({ ...user, loaded: true, isCustomer: !!(customer?.data?.amount), apiKey }));
+
+    dispatch(setUserData({ ...user, loaded: true, isCustomer: !!(customer?.data?.amount) }));
     const redirect = localStorage.getItem('signinRedirect');
     setLoading(false);
     if (redirect) {
       localStorage.removeItem('signinRedirect');
       return router.push(redirect);
     }
-    else if (!user.id && !publicPaths.includes(location)) {
+    else if (!user?.id && !publicPaths.includes(location)) {
       // it is a secure path, redirect user to login;
       setLoading(false);
       localStorage.setItem('signinRedirect', location);
@@ -60,7 +65,11 @@ const Startup = ({children}: StartupProps) => {
   useEffect(() => {
     if (publicPaths.includes(location)) setLoading(false);
     userSession1();
-  }, [supabase, router])
+  }, [supabase, router]);
+
+  useEffect(() => {
+    if (user?.id && !apiKey) getAPIToken(user.id); 
+  }, [user])
  
 
   return (
