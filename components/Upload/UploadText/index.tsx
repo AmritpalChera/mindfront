@@ -16,7 +16,7 @@ export default function UploadText({ setUploadType }) {
   const [metadata, setMetadata] = useState(params.get('metadata') || '');
   const [returnPath] = useState(localStorage.getItem('uploadReturn'));
   const [vectorId] = useState(params.get('id') || '');
-
+  const [error, setError] = useState('');
   const router = useRouter();
 
   const handleReturn = () => {
@@ -54,8 +54,9 @@ export default function UploadText({ setUploadType }) {
         if (returnPath) handleReturn();
         else router.push(`/dashboard?project=${formProps.project}&collection=${formProps.collection}`);
       } catch (e) {
-        console.log(e?.response?.data);
-        toast.error('Process failed. Try again');
+        console.log(e?.response?.data)
+        if (typeof (e?.response?.data?.error) === 'string') setError(e?.response?.data?.error);
+        toast.error('Process failed. Try again')
       }
     }
     
@@ -94,7 +95,7 @@ export default function UploadText({ setUploadType }) {
             <p className="font-bold text-primary">Project Name</p>
             <input value={projectInput} onChange={(e)=>setProjectInput(e.target.value)} name="project" className="w-full border-gray dark:bg-secondary rounded-lg mt-2 shadow-md" placeholder="Walmart..." />
           </div>
-
+          {error && <p className="text-red font-bold text-center my-3">{error}</p>}
           <div className="flex justify-center w-full">
             <button
               onClick={() => { }}

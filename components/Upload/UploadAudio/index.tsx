@@ -21,7 +21,6 @@ export default function UploadAudio({ setUploadType }) {
 
   const onChangeHandler = async (event) => {
     const file: File = event.target.files[0];
-    console.log('selectedFile: ', event.target.files[0]);
     setFile(file);
   };
   
@@ -75,7 +74,7 @@ export default function UploadAudio({ setUploadType }) {
             onClick={() => { }}
             className={`rounded-md w-full text-center relative flex items-center justify-center ease-in-out ${file? 'bg-green-500' : 'bg-secondary '} py-2 h-9  mt-4 px-8 text-base font-semibold text-white duration-300 ease-in-out cursor-pointer`}
         >
-          <input onChange={onChangeHandler} type="file" className="w-full opacity-0 cursor-pointer h-fully left-0 top-0 absolute bg-blue-400" />
+          <input accept=".mp3,.wav" onChange={onChangeHandler} type="file" className="w-full opacity-0 cursor-pointer h-fully left-0 top-0 absolute bg-blue-400" />
           <div>Upload Audio</div>
           </div>
         <div className="text-sm mt-2"><span className=" text-primary font-bold">Uploaded file:</span> {file?.name}</div>

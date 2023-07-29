@@ -16,10 +16,10 @@ export default function UploadPdf({ setUploadType }) {
   const params = useSearchParams();
   const [project, setProject] = useState(params.get('project') || '');
   const router = useRouter();
+  const [error, setError] = useState('');
 
   const onChangeHandler = async (event) => {
     const file: File = event.target.files[0];
-    console.log('selectedFile: ', event.target.files[0]);
     setFile(file);
   };
   
@@ -29,10 +29,9 @@ export default function UploadPdf({ setUploadType }) {
     e.preventDefault();
     const formData = new FormData(e.target);
     const formProps: any = Object.fromEntries(formData);
-
-    if (file.size > 15000000) throw toast.error('File limit is 15MB');
     const isMetaJson = stringToJSON(formProps.metadata);
-    if (!isMetaJson) toast.error("Metadata invalid");
+    if (file.size > 20000000) toast.error('File limit is 20MB');
+    else if (!isMetaJson) toast.error("Metadata invalid");
     else {
       const data = new FormData();
       
@@ -49,6 +48,7 @@ export default function UploadPdf({ setUploadType }) {
         e.target.reset();
       } catch (e) {
         console.log(e?.response?.data)
+        if (typeof (e?.response?.data?.error) === 'string') setError(e?.response?.data?.error);
         toast.error('Process failed. Try again')
       }
       
@@ -68,12 +68,12 @@ export default function UploadPdf({ setUploadType }) {
           </div>
           
         </div>
-       <div className="text-gray-700">15MB max</div>
+       <div className="text-gray-700">20MB max</div>
         <div
             onClick={() => { }}
             className={`rounded-md w-full text-center relative flex items-center justify-center ease-in-out ${file? 'bg-green-700' : 'bg-red '} py-2 h-9  mt-4 px-8 text-base font-semibold text-white duration-300 ease-in-out cursor-pointer`}
         >
-          <input onChange={onChangeHandler} type="file" className="w-full opacity-0 cursor-pointer h-fully left-0 top-0 absolute bg-blue-400" />
+          <input accept=".pdf" onChange={onChangeHandler} type="file" className="w-full opacity-0 cursor-pointer h-fully left-0 top-0 absolute bg-blue-400" />
           <div>Upload PDF</div>
           </div>
         <div className="text-sm mt-2"><span className=" text-primary font-bold">Uploaded file:</span> {file?.name}</div>
@@ -92,7 +92,7 @@ export default function UploadPdf({ setUploadType }) {
             <p className="font-bold text-primary">Project Name</p>
             <input value={project} onChange={(e) => setProject(e.target.value)}  name="project" className="w-full border-gray rounded-lg mt-2 shadow-md" placeholder="Walmart..." />
           </div>
-
+          {error && <p className="text-red font-bold text-center my-3">{error}</p>}
           <div className="flex justify-center w-full">
             <button
               type="submit"

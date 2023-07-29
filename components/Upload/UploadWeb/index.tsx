@@ -1,6 +1,6 @@
 import Toggle from "@/atoms/Switch";
 import useUserBackend from "@/hooks/useUserBackend";
-import { stringToJSON } from "@/utils/app";
+import { isValidUrl, stringToJSON } from "@/utils/app";
 import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/outline";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -15,6 +15,7 @@ export default function UploadWeb({setUploadType}) {
   const params = useSearchParams();
   const [projectInput, setProjectInput] = useState(params.get('project') || '');
   const [collectionInput, setCollectionInput] = useState(params.get('collection') || '');
+  const [error, setError] = useState('');
 
   const formSubmitted = async (e) => {
     if (loading) return;
@@ -24,8 +25,8 @@ export default function UploadWeb({setUploadType}) {
     const formProps: any = Object.fromEntries(formData);
   
     const isMetaJson = stringToJSON(formProps.metadata);
-    if (!isMetaJson) toast.error("Metadata invalid");
-
+    if (!isMetaJson)  toast.error("Metadata invalid");
+    else if (!isValidUrl(formProps.webpage)) toast.error("Invalid URL")
     else {
 
       try {
@@ -39,8 +40,9 @@ export default function UploadWeb({setUploadType}) {
         e.target.reset();
         router.push(`/dashboard?project=${formProps.project}&collection=${formProps.collection}`);
       } catch (e) {
-        console.log(e?.response?.data);
-        toast.error('Process failed. Try again');
+        console.log(e?.response?.data)
+        if (typeof (e?.response?.data?.error) === 'string') setError(e?.response?.data?.error);
+        toast.error('Process failed. Try again')
       }
     }
     setLoading(false);
@@ -93,7 +95,7 @@ export default function UploadWeb({setUploadType}) {
             <p className="font-bold text-primary">Project Name</p>
             <input value={projectInput} onChange={(e) => setProjectInput(e.target.value)} name="project" className="w-full border-gray rounded-lg mt-2 shadow-md" placeholder="Walmart..." />
           </div>
-
+          {error && <p className="text-red font-bold text-center my-3">{error}</p>}
           <div className="flex justify-center w-full">
             <button
               onClick={() => { }}

@@ -37,3 +37,12 @@ export function JSONtoString(json: JSON) {
   o = o.replaceAll("\"", "");
   return o;
 }
+
+export function isValidUrl(string: string) {
+  try {
+    new URL(string);
+    return true;
+  } catch (err) {
+    return false;
+  }
+}

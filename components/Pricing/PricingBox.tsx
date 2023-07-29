@@ -65,7 +65,6 @@ const PricingBox = (props: PriceboxTypes) => {
 
   const getButtonText = () => {
     if (!user.id) return 'Sign in';
-    console.log('user plan type: ', user.planType)
     if (user.planType === id) return 'Current plan';
     if (user.planType === CustomerPlans.CUSTOM) return 'Switch plan';
     if (id === CustomerPlans.CUSTOM) return 'Get custom'

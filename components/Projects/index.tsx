@@ -11,7 +11,6 @@ export default function Projects() {
 
   useEffect(() => {
     const project = params.get('project');
-    console.log('project is: ', project)
     setActiveProject(project || '');
   }, [params])
 

@@ -9,12 +9,6 @@ import { useEffect, useState } from "react";
 export default function New() {
   const [activeTab] = useState('new');
 
-  useEffect(() => {
-    console.log('active tab is:  ', activeTab);
-    console.log('I am making a video');
-  }, [activeTab]);
-
-
   return (
     <>
       <div>

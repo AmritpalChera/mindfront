@@ -7,10 +7,6 @@ import { useEffect, useState } from "react";
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('dashboard');
 
-  useEffect(() => {
-    console.log('active tab is:  ', activeTab);
-    console.log('I am making a video');
-  }, []);
 
 
   return (
