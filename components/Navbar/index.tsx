@@ -39,7 +39,7 @@ export default function Navbar({activeTab}) {
     { name: 'New Upload', id: 'new', icon: DocumentDuplicateIcon, current: activeTab === 'new' },
     { name: 'Profile', id: 'profile', icon: UsersIcon, current: activeTab === 'profile' },
     { name: 'Pricing', id: 'pricing', icon: CreditCardIcon, current: activeTab === 'pricing' },
-    { name: 'Setup Guide', id: 'guide', icon: Square3Stack3DIcon, current: activeTab === 'guide' },
+    // { name: 'Setup Guide', id: 'guide', icon: Square3Stack3DIcon, current: activeTab === 'guide' },
   ]
   const teams = [
     { id: '1', name: 'Customer Support', href: 'https://forms.gle/GNX5pbWPAziEFU9U7', initial: 'C', current: activeTab === '1' },
