@@ -1,5 +1,7 @@
 "use client";
+import useUserBackend from "@/hooks/useUserBackend";
 import { selectUser } from "@/redux/features/UserSlice";
+import { CustomerPlans, billManageURL } from "@/utils/app/customerplans";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -14,7 +16,8 @@ interface PriceboxTypes {
   subscribed?: boolean,
   featured?: boolean,
   description?: string,
-  planType: string
+  planType: string,
+  id: string
 }
 
 const plans = {
@@ -31,25 +34,48 @@ const plans = {
 };
 
 const PricingBox = (props: PriceboxTypes) => {
-  const { price, duration, packageName, subtitle, disabled, children, subscribed, featured, description, planType } = props;
+  const { price, duration, packageName, subtitle, disabled, children, subscribed, featured, description, planType, id } = props;
+  const backend = useUserBackend();
 
   const user = useSelector(selectUser);
   const router = useRouter();
-  const handleButtonClick = () => {
+  const handleButtonClick = async () => {
     if (!user.email) return router.push('/signin');
-    else if (price === '0' && !subscribed) return toast('Already on lite plan');
-    else if (subscribed) {
-      window.open(`https://billing.stripe.com/p/login/00g8yIgpi7XX9fGdQQ?prefilled_email=${user.email}`, "_blank");
-    } else if (price === '15') {
-      // basic monthly plan
-      window.open(`https://buy.stripe.com/6oE4iDdkk0eW2WIcMM?client_reference_id=${user.id}&prefilled_email=${user.email}`, '_blank')
-    } else if (price === '150') {
-      // basic yearly plan
-      window.open(`https://buy.stripe.com/5kAg1l6VWe5M8h2145?client_reference_id=${user.id}&prefilled_email=${user.email}`, '_blank')
+    if (id === CustomerPlans.LITE && !user.isCustomer) return toast.error('Already on lite plan.');
+    if (id == CustomerPlans.CUSTOM && user.planType === CustomerPlans.CUSTOM) return toast.error('Can only switch one-time plan');
+    else if ((!user.isCustomer || user.planType === CustomerPlans.CUSTOM) || (user.planType !== CustomerPlans.CUSTOM && id === CustomerPlans.CUSTOM)) {
+      await backend.post('/stripe/checkoutSession', {
+        priceId: id,
+        email: user.email,
+        userId: user.id
+      }).then(res => {
+        if (res.data) {
+          router.push(res.data)
+        }
+      });
+    } else {
+      // manage the plan
+      router.push(billManageURL)
     }
+    
   };
+    
 
   const featuredText = featured ? 'text-white dark:text-dark' : 'text-dark dark:text-white';
+
+  const getButtonText = () => {
+    if (!user.id) return 'Sign in';
+    console.log('user plan type: ', user.planType)
+    if (user.planType === id) return 'Current plan';
+    if (user.planType === CustomerPlans.CUSTOM) return 'Switch plan';
+    if (id === CustomerPlans.CUSTOM) return 'Get custom'
+    if (user.isCustomer) return 'Manage Subscription';
+    else return 'Upgrade'
+  }
+
+  if (disabled) {
+    return null;
+  }
 
   return (
     <div className="w-full max-w-sm h-[550px] min-w-[300px]">
@@ -76,7 +102,7 @@ const PricingBox = (props: PriceboxTypes) => {
               disabled={disabled}
               onClick={handleButtonClick}
               className="flex w-full items-center disabled:bg-gray justify-center rounded-md bg-primary p-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
-              {disabled? 'Coming Soon' : user.email? subscribed? 'Manage Subscription' : (price==='0')? 'Current plan' : 'Get Started' : 'Sign in'}
+                {getButtonText()}
             </button>
           </div>
           <div className={`mb-4 ${featuredText}`}>

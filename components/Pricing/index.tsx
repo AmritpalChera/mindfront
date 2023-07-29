@@ -1,30 +1,23 @@
 "use client";
 import { selectUser } from "@/redux/features/UserSlice";
-import supabase from "@/utils/supabaseClient";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import SectionTitle from "../Common/SectionTitle";
 import OfferList from "./OfferList";
 import PricingBox from "./PricingBox";
-import Navbar from "../Navbar";
 import Link from "next/link";
+import { CustomerPlans } from "@/utils/app/customerplans";
 
 const Pricing = () => {
   const [isMonthly, setIsMonthly] = useState(true);
-  const [subscription, setSubscription] = useState(false);
 
   const user = useSelector(selectUser);
-  const getSubscription = async () => {
-    if (!user.id) return;
 
-    const {data} = await supabase.from('customers').select().eq('_id', user.id).single();
-    if (!data || !data.active) return;
-    setSubscription(true)
-  }
 
   useEffect(() => { 
-    getSubscription();
-  }, [user.email])
+    
+  }, [])
+  
 
   return (
     <section id="pricing" className="relative z-10 py-16 md:py-20 lg:py-28">
@@ -40,25 +33,26 @@ const Pricing = () => {
         <div className="flex gap-4 flex-wrap justify-center">
           <PricingBox
             packageName="Lite"
-            price={isMonthly ? "0" : "0"}
-            duration={isMonthly ? "mo" : "yr"}
+            price="0"
+            duration="mo"
             subtitle="For small scale projects"
-            subscribed={subscription}
+            disabled={user.planType === CustomerPlans.CUSTOM}
             planType="starter"
+            id="lite"
           >
             <OfferList text="1 project" status="active" />
-            <OfferList text="300 vectors total" status="active" />
+            <OfferList text="100 vectors total" status="active" />
             <OfferList text="Email support" status="active" />
             <OfferList text="Discord channel" status="active" />
             <OfferList text="Test with chatbot" status="active" />
           </PricingBox>
           <PricingBox
             packageName="Basic"
-            price={isMonthly ? "30" : "150"}
-            duration={isMonthly ? "mo" : "yr"}
+            price={(user.configs?.pricings?.basic?.amount/100).toString() || "30"}
+            duration={"mo"}
             subtitle="For medium scale projects"
-            subscribed={subscription}
             planType="starter"
+            id="basic"
           >
             <OfferList text="10 projects" status="active" />
             <OfferList text="3000 vectors total" status="active" />
@@ -68,14 +62,14 @@ const Pricing = () => {
           </PricingBox>
           <PricingBox
             packageName="One-time"
-            price={isMonthly ? "300" : "700"}
-            duration={isMonthly ? "" : ""}
+            price={(user.configs?.pricings?.custom?.amount/100).toString() || "300"}
+            duration={""}
             subtitle="Must bring your own keys"
             disabled={false}
-            subscribed={subscription}
             description="Get full control of your data by bringing your own keys!"
             featured={true}
             planType="custom"
+            id="custom"
           >
             <OfferList text="Unlimited Projects" status="active" />
             <OfferList text="100,000+ vectors" status="active" />

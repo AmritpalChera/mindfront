@@ -2,6 +2,7 @@
 
 import { selectUser, setUserData } from '@/redux/features/UserSlice';
 import { publicPaths } from '@/utils/app/paths';
+import backend from '@/utils/axios/backend';
 import supabase from '@/utils/supabaseClient';
 
 import { useRouter, usePathname } from 'next/navigation';
@@ -41,7 +42,9 @@ const Startup = ({children}: StartupProps) => {
     const customer = await supabase.from('customers').select().single();
     const user: any = session?.data?.session?.user;
 
-    dispatch(setUserData({ ...user, loaded: true, isCustomer: !!(customer?.data?.amount)}));
+    const configs = await backend.get('/configs').then(res => res.data);
+
+    dispatch(setUserData({ ...user, loaded: true, isCustomer: !!(customer?.data?.amount), planType: customer?.data?.plan || 'lite', configs: configs}));
     const redirect = localStorage.getItem('signinRedirect');
     if (redirect && user?.id) {
       localStorage.removeItem('signinRedirect');
@@ -62,7 +65,7 @@ const Startup = ({children}: StartupProps) => {
     if (!user.apiKey && user.id) { 
       getAPIToken(user.id);
     }
-  }, [location]);
+  }, [location, user]);
 
   const waitForRender = !publicPaths.includes(location) && !user.apiKey;
   
