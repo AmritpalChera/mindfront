@@ -57,8 +57,6 @@ export default function Collections({ activeProject }) {
 
   const handleDeleteCollection = async () => {
     setDeleteLoading(true);
-    console.log('delete index: ', isDeleteModalOpen)
-    console.log(`${activeProject}-${collections[isDeleteModalOpen].collection}`);
     const deleted = await backend.post('/collection/delete', { db: activeProject, collection: collections[isDeleteModalOpen].collection }).then(res => res.data).catch(err => console.log(err?.response?.data));
     if (!deleted) toast.error('Could not delete colletion');
     else {
@@ -74,14 +72,10 @@ export default function Collections({ activeProject }) {
   }
 
   const handleActionClick = (action: string, index: number) => {
-    // console.log('collection is: ', collectionName, 'at index: ', index, 'with action: ', action)
     if (action === 'test') {
-      console.log('redirect to test screen');
     } else if (action === 'vectors') {
       router.push(`/dashboard?project=${activeProject}&collection=${collections[index].collection}`)
-      console.log('open vector screen');
     } else if (action === 'delete') {
-      console.log('delete this collection');
       setIsDeleteModalOpen(index);
     }
   }

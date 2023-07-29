@@ -24,7 +24,7 @@ const MessageWindow = ({ messages, windowRef, topRef }: any) => {
                   <OurMessage text={message.content} />
                 </OurMessageContainer>)
               } else if (message.role === 'assistant') {
-                console.log('their message');
+                // console.log('their message');
                 return (<TheirMessageContainer key={key} imageUrl={'https://image.lexica.art/full_jpg/f5fb48ed-5c50-4179-845d-b03c4f95937d'}>
                   <TheirMessage text={message.content} />
                 </TheirMessageContainer>)

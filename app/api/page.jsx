@@ -13,12 +13,7 @@ import { useSelector } from "react-redux";
 export default function Dashboard() {
   const [activeTab] = useState('api');
 
-  const [collection, setCollection] = useState('');
-
-  const { apiKey } = useSelector(selectUser);
-  console.log(apiKey);
-
-  
+  const [collection, setCollection] = useState('');  
 
   const renderDemo = () => {
     return(

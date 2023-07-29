@@ -60,8 +60,6 @@ export default function ProjectsGrid() {
 
   const handleDeleteProject = async () => {
     setDeleteLoading(true);
-    console.log('delete index: ', deleteConfirmModal)
-    console.log(`${projectsList[deleteConfirmModal].projectName}`);
     const deleted = await backend.post('/db/delete', { db: projectsList[deleteConfirmModal].projectName }).then(res => res.data).catch(err => console.log(err?.response?.data));
     if (!deleted) toast.error('Could not delete project');
     else {
@@ -77,7 +75,6 @@ export default function ProjectsGrid() {
   }
 
   const handleOptionsClick = (action: string, index: number) => {
-    console.log('action is: ', action, ' at number: ', index);
     if (action === 'delete') {
       setDeleteConfirmModal(index);
     }

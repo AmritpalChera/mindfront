@@ -12,7 +12,6 @@ export default function Filters({activeProject, searchValue, filtersApplied, col
     if (!searchValue) return toast.error('Please enter something');
     setLoadingVectors(true)
     const vectors = await backend.post('/data/query', { db: activeProject, collection: collectionName, search: searchValue }).then(res => res.data).catch(err => console.log(err?.response?.data));
-    console.log('searched vectors are: ', vectors)
     if (vectors.data) {
       setVectors(vectors.data);
       setFiltersApplied(true);
