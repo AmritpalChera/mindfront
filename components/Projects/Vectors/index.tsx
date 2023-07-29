@@ -33,7 +33,6 @@ export default function Vectors({ activeProject, collectionName } : VectorsInter
   const getVectors = async () => {
     setLoadingVectors(true)
     const data = await backend.post("/collection/vectors", { db: activeProject, collection: collectionName }).then(res => res.data).catch(err => err?.response?.data);
-    console.log(data);
     if (data && data?.data?.length > 0) {
       setVectors(data.data);
       setTotalVectors(data.count)
