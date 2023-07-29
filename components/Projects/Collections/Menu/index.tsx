@@ -5,7 +5,7 @@ import { ChatBubbleBottomCenterIcon, TrashIcon, ViewfinderCircleIcon } from '@he
 
 const solutions = [
   { name: 'View Vectors', description: '', id: 'vectors', icon: ViewfinderCircleIcon },
-  { name: 'Test Collection', description: '', id: 'test', icon: ChatBubbleBottomCenterIcon},
+  // { name: 'Test Collection', description: '', id: 'test', icon: ChatBubbleBottomCenterIcon},
   { name: 'Delete Collection', description: '', id: 'delete', icon: TrashIcon},
 ]
 
@@ -35,7 +35,8 @@ export default function CollectionMenu({handleActionClick, index}: CollectionMen
           {({ close }) => (
               <div className="w-screen max-w-sm flex-auto rounded-3xl dark:bg-dark bg-white p-4 text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
               {solutions.map((item) => (
-                <div onClick={() => {
+                <div onClick={(e) => {
+                  e.stopPropagation();
                   close()
                   handleActionClick(item.id, index);   
                 }} key={item.name} className="relative border-b  p-4 hover:text-primary hover:cursor-pointer">

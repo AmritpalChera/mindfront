@@ -82,7 +82,7 @@ export default function Collections({ activeProject }) {
 
   const collectionCard = (collection: collectionType, index: number) => {
     return (
-      <div key={collection.collection} className="shadow border-gray-300 border rounded-md  mt-4  w-full p-2">
+      <div onClick={()=>handleActionClick('vectors', index)} key={collection.collection} className="shadow border-gray-300 border hover:shadow-md cursor-pointer rounded-md  mt-4  w-full p-2">
         <div  className="w-full justify-between flex">
           <div className="flex flex-wrap items-center gap-4">
             <p className="font-bold md:text-xl text-sm max-w-[200px] md:max-w-[400px] text-ellipsis overflow-clip whitespace-pre">{collection.collection}</p>

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import ProjectsMenu from "./Menu";
 import BaseModal from "@/atoms/Modal";
-import { ThreeDots } from "react-loader-spinner";
+import { Oval, ThreeDots } from "react-loader-spinner";
 import { toast } from "react-toastify";
 import Image from "next/image";
 
@@ -22,16 +22,19 @@ export default function ProjectsGrid() {
   const [projectsList, setProjectsList] = useState([]);
   const router = useRouter();
   const parentRef = useRef();
+  const [loading, setLoading] = useState(true);
   const [deleteConfirmModal, setDeleteConfirmModal] = useState(-1);
   const [deleteLoading, setDeleteLoading] = useState(false);
 
   const backend = useUserBackend();
 
   const getProjectsList = async () => {
+    setLoading(true)
     const list = await userBackend.post('/db/list', {}).then(res => res.data).catch(err => {
       console.log(err?.response?.data);
     });
     if (list?.success) setProjectsList(list.projects)
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -126,6 +129,11 @@ export default function ProjectsGrid() {
       </div>
     )
   }
+
+  if (loading) {
+    return <Oval />
+  }
+  
   return (
     <div className="flex flex-wrap gap-8" ref={parentRef}>
       {createCard()}

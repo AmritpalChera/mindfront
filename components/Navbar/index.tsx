@@ -42,9 +42,9 @@ export default function Navbar({activeTab}) {
     { name: 'Setup Guide', id: 'guide', icon: Square3Stack3DIcon, current: activeTab === 'guide' },
   ]
   const teams = [
-    { id: '1', name: 'Customer Support', href: '#', initial: 'C', current: activeTab === '1' },
-    { id: '2', name: 'Twitter', href: '#', initial: 'T', current: activeTab === '2' },
-    { id: '3', name: 'Discord', href: '#', initial: 'D', current: activeTab === '3'  },
+    { id: '1', name: 'Customer Support', href: 'https://forms.gle/GNX5pbWPAziEFU9U7', initial: 'C', current: activeTab === '1' },
+    { id: '2', name: 'Feedback', href: 'https://forms.gle/zxWEff4EFyoQ76Pf7', initial: 'F', current: activeTab === '2' },
+    { id: '3', name: 'Message Founder', href: 'https://twitter.com/AwesomAmri', initial: 'M', current: activeTab === '3' },
   ]
 
   
@@ -141,8 +141,9 @@ export default function Navbar({activeTab}) {
                           <ul role="list" className="-mx-2 mt-2 space-y-1">
                             {teams.map((team) => (
                               <li key={team.name}>
-                                <div
-                                  onClick={() => setActiveTab(team.id)}
+                                <Link
+                                  href={team.href}
+                                  target='_blank'
                                   className={classNames(
                                     team.current
                                       ? 'bg-gray-50 text-indigo-600'
@@ -161,7 +162,7 @@ export default function Navbar({activeTab}) {
                                     {team.initial}
                                   </span>
                                   <span className="truncate">{team.name}</span>
-                                </div>
+                                </Link>
                               </li>
                             ))}
                           </ul>
@@ -234,8 +235,9 @@ export default function Navbar({activeTab}) {
                   <ul role="list" className="-mx-2 mt-2 space-y-1">
                     {teams.map((team) => (
                       <li key={team.name}>
-                        <div
-                          onClick={() => setActiveTab(team.id)}
+                        <Link
+                          href={team.href}
+                          target="_blank"
                           className={classNames(
                             team.current
                               ? 'bg-gray-50 text-indigo-600'
@@ -254,7 +256,7 @@ export default function Navbar({activeTab}) {
                             {team.initial}
                           </span>
                           <span className="truncate">{team.name}</span>
-                        </div>
+                        </Link>
                       </li>
                     ))}
                   </ul>

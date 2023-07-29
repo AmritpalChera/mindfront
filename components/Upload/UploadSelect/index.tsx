@@ -1,5 +1,6 @@
 import { ChevronRightIcon } from '@heroicons/react/20/solid'
 import { Bars3Icon, CalendarIcon, DocumentTextIcon, SpeakerWaveIcon } from '@heroicons/react/24/outline'
+import Link from 'next/link'
 
 const items = [
   {
@@ -69,10 +70,10 @@ export default function UploadSelect({setUploadType}) {
         ))}
       </ul>
       <div className="mt-6 flex">
-        <a href="#" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
+        <Link href="/api" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
           Check out our API
           <span aria-hidden="true"> &rarr;</span>
-        </a>
+        </Link>
       </div>
     </div>
   )
