@@ -8,6 +8,7 @@ import ProjectsMenu from "./Menu";
 import BaseModal from "@/atoms/Modal";
 import { ThreeDots } from "react-loader-spinner";
 import { toast } from "react-toastify";
+import Image from "next/image";
 
 type ProjectType = {
   projectName: string;
@@ -39,12 +40,20 @@ export default function ProjectsGrid() {
 
   const createCard = () => {
     return (
-      <div onClick={()=>router.push('/new')} className="w-64 rounded-xl border-2 border-gray-200 text-white dark:text-black dark:bg-white bg-secondary  cursor-pointer h-64 font-medium flex flex-col items-center justify-center ">
+      <div onClick={()=>router.push('/new')} className="w-64  relative rounded-xl border-2 border-gray-200 text-white dark:text-black dark:bg-white bg-secondary  cursor-pointer h-64 font-medium flex flex-col items-center justify-center">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
         </svg>
         <span className="mt-4 text-lg ">Create New</span>
-        
+        {projectsList.length === 0 && <div className="absolute -right-20 top-4">
+          <Image
+            src="/images/vector/cursors.png"
+            alt="index-image"
+            height={150}
+            width={150}
+            className="mx-auto max-w-full lg:mr-0 animate-pulse"
+          />
+        </div>}
       </div>
     )
   }

@@ -1,17 +1,18 @@
 "use client";
 
-import { selectUser } from "@/redux/features/UserSlice";
+import { selectUser, setUserData } from "@/redux/features/UserSlice";
 import supabase from "@/utils/supabaseClient";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const SignupPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [error, setError] = useState('');
+  const dispatch = useDispatch();
 
   const formSubmitted = async (e, data) => {
     
@@ -26,7 +27,8 @@ const SignupPage = () => {
     } else {
       setEmail('');
       setPassword('');
-      window.location.href = '/signin'
+      dispatch(setUserData({ ...status.data.user }));
+      router.push('/dashboard')
     }
     
   }

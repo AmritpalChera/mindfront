@@ -19,10 +19,11 @@ interface BaseModalProps {
   parentElement: React.ReactNode,
   children: React.ReactNode,
   isOpen: boolean,
-  setIsOpen: (e: number) => void
+  setIsOpen: (e: number) => void,
+  styles?: any
 }
 
-function BaseModal({parentElement, children, isOpen, setIsOpen}: BaseModalProps) {
+function BaseModal({parentElement, children, isOpen, setIsOpen, styles}: BaseModalProps) {
   function closeModal() {
     setIsOpen(-1);
   }
@@ -32,12 +33,19 @@ function BaseModal({parentElement, children, isOpen, setIsOpen}: BaseModalProps)
     if (parentElement) Modal.setAppElement(parentElement);
   }, [parentElement]);
 
+  const appliedStyles = {
+    content: {
+      ...customStyles.content,
+      ...styles
+    }
+  };
+
   return (
     <div>
       <Modal
         isOpen={isOpen}
         onRequestClose={closeModal}
-        style={customStyles}
+        style={appliedStyles}
         contentLabel="Example Modal"
       >
        {children}

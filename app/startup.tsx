@@ -6,14 +6,14 @@ import backend from '@/utils/axios/backend';
 import supabase from '@/utils/supabaseClient';
 
 import { useRouter, usePathname } from 'next/navigation';
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 interface StartupProps {
   children: ReactNode
 }
 
-const Startup = ({children}: StartupProps) => {
+const Startup = ({ children }: StartupProps) => {
   const user = useSelector(selectUser);
   const router = useRouter();
   const dispatch = useDispatch();
@@ -37,14 +37,13 @@ const Startup = ({children}: StartupProps) => {
   
 
   const userSession1 = async () => {
-    console.log('running user session')
     const session = await supabase.auth.getSession();
     const customer = await supabase.from('customers').select().single();
     const user: any = session?.data?.session?.user;
 
     const configs = await backend.get('/configs').then(res => res.data);
 
-    dispatch(setUserData({ ...user, loaded: true, isCustomer: !!(customer?.data?.amount), planType: customer?.data?.plan || 'lite', configs: configs}));
+    dispatch(setUserData({ ...user, loaded: true, isCustomer: !!(customer?.data?.amount), planType: customer?.data?.plan || 'lite', configs: configs }));
     const redirect = localStorage.getItem('signinRedirect');
     if (redirect && user?.id) {
       localStorage.removeItem('signinRedirect');
@@ -55,23 +54,26 @@ const Startup = ({children}: StartupProps) => {
       localStorage.setItem('signinRedirect', location);
       router.push('/signin');
     }
-   
+    
     // Track an event. It can be anything, but in this example, we're tracking a Signed Up event.
     // Include a property about the signup, like the Signup Type
   }
 
   useEffect(() => {
     if (!user.id) userSession1();
-    if (!user.apiKey && user.id) { 
-      getAPIToken(user.id);
-    }
-  }, [location, user]);
+  }, [location]);
+
+  useEffect(() => {
+    if (user?.id) getAPIToken(user.id);
+  }, [user?.id])
+
 
   const waitForRender = !publicPaths.includes(location) && !user.apiKey;
-  
+  const ref = useRef();
+
   return (
-    <div>
-      {waitForRender? 'loading...' : children}
+    <div ref={ref}>
+      {waitForRender ? 'loading...' : children}
     </div>
   )
 }
