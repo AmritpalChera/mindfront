@@ -1,13 +1,16 @@
 "use client";
 
 import useUserBackend from "@/hooks/useUserBackend";
+import { selectUser } from "@/redux/features/UserSlice";
 import { stringToJSON } from "@/utils/app";
-import openai from "@/utils/setup/openai";
+import { CustomerPlans } from "@/utils/app/customerplans";
+import openai, { customOpenai } from "@/utils/setup/openai";
 import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/outline";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 export default function UploadAudio({ setUploadType }) {
@@ -18,6 +21,7 @@ export default function UploadAudio({ setUploadType }) {
   const [project, setProject] = useState(params.get('project') || '');
   const [collection, setCollection] = useState(params.get('collection') || '');
   const router = useRouter();
+  const user = useSelector(selectUser);
 
   const onChangeHandler = async (event) => {
     const file: File = event.target.files[0];
@@ -34,10 +38,20 @@ export default function UploadAudio({ setUploadType }) {
     const isMetaJson = stringToJSON(formProps.metadata);
     if (!isMetaJson) toast.error("Metadata invalid");
 
+    
     if (!file) return toast.error('File not uploaded');
     if (file.size > 20000000) throw toast.error('File limit is 20MB');
-    const response = await openai.createTranscription(file, 'whisper-1', undefined, 'json', 1, 'en');
-    const content = response.data?.text;
+    let content: string = '';
+
+    if (user.planType === CustomerPlans.CUSTOM) {
+      const customOpenAi = customOpenai(user.openaiKey);
+      const response = await customOpenAi.createTranscription(file, 'whisper-1', undefined, 'json', 1, 'en');
+      content = response.data?.text;
+    } else {
+      const response = await openai.createTranscription(file, 'whisper-1', undefined, 'json', 1, 'en');
+      content = response.data?.text;
+    }
+
     if (!content) return toast.error('Could not transcribe audio');
 
     try {

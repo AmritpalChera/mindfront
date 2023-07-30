@@ -20,17 +20,17 @@ const Startup = ({ children }: StartupProps) => {
   const location = usePathname();
 
   const getAPIToken = async (userId: string) => {
-    const tokenData = await supabase.from('keys').select('mindplugKey').eq('userId', userId).single();
+    const tokenData = await supabase.from('keys').select('mindplugKey, openaiKey').eq('userId', userId).single();
     if (tokenData.error) {
       // could not create or get token
-      const newTokenData = await supabase.from('keys').upsert({ userId: userId }).select('mindplugKey').single();
+      const newTokenData = await supabase.from('keys').upsert({ userId: userId }).select('mindplugKey, openaiKey').single();
       if (newTokenData.error) {
         console.log('could not create new token', newTokenData.error)
       }
-      dispatch(setUserData({ apiKey: newTokenData.data?.mindplugKey }))
+      dispatch(setUserData({ apiKey: newTokenData.data?.mindplugKey, openaiKey: newTokenData.data?.openaiKey }))
 
     } else {
-      dispatch(setUserData({ apiKey: tokenData.data?.mindplugKey }))
+      dispatch(setUserData({ apiKey: tokenData.data?.mindplugKey, openaiKey: tokenData.data?.openaiKey }))
     }
   }
 

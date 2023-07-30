@@ -1,6 +1,5 @@
 "use client";
 import { selectUser } from "@/redux/features/UserSlice";
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import SectionTitle from "../Common/SectionTitle";
 import OfferList from "./OfferList";
@@ -9,15 +8,7 @@ import Link from "next/link";
 import { CustomerPlans } from "@/utils/app/customerplans";
 
 const Pricing = () => {
-  const [isMonthly, setIsMonthly] = useState(true);
-
-  const user = useSelector(selectUser);
-
-
-  useEffect(() => { 
-    
-  }, [])
-  
+  const user = useSelector(selectUser);  
 
   return (
     <section id="pricing" className="relative z-10 py-16 md:py-20 lg:py-28">
@@ -40,29 +31,29 @@ const Pricing = () => {
             planType="starter"
             id="lite"
           >
-            <OfferList text="1 project" status="active" />
-            <OfferList text="100 vectors total" status="active" />
+            <OfferList text={`${user.configs.plans?.lite?.projectLimit} project`} status="active" />
+            <OfferList text={`${user.configs.plans?.lite?.vectorLimit} vectors total`} status="active" />
             <OfferList text="Email support" status="active" />
             <OfferList text="Discord channel" status="active" />
             <OfferList text="Test with chatbot" status="active" />
           </PricingBox>
           <PricingBox
             packageName="Basic"
-            price={(user.configs?.pricings?.basic?.amount/100).toString() || "30"}
+            price={(user.configs?.plans?.basic?.amount/100).toString() || "30"}
             duration={"mo"}
             subtitle="For medium scale projects"
             planType="starter"
             id="basic"
           >
-            <OfferList text="10 projects" status="active" />
-            <OfferList text="3000 vectors total" status="active" />
+            <OfferList text={`${user.configs.plans?.basic?.projectLimit} projects`} status="active" />
+            <OfferList text={`${user.configs.plans?.basic?.vectorLimit} vectors total`} status="active" />
             <OfferList text="Email support" status="active" />
             <OfferList text="Discord channel" status="active" />
             <OfferList text="Test with chatbot" status="active" />
           </PricingBox>
           <PricingBox
             packageName="One-time"
-            price={(user.configs?.pricings?.custom?.amount/100).toString() || "300"}
+            price={(user.configs?.plans?.custom?.amount/100).toString() || "300"}
             duration={""}
             subtitle="Must bring your own keys"
             disabled={false}

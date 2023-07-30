@@ -20,3 +20,12 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 export default openai;
+
+export const customOpenai = (apiKey: string) => {
+  const configurationCus = new Configuration({
+    apiKey: apiKey,
+    formDataCtor: CustomFormData
+  });
+  const config = new OpenAIApi(configurationCus);
+  return config;
+}

@@ -1,6 +1,8 @@
+import { selectUser } from "@/redux/features/UserSlice";
 import generateBotResponse from "@/utils/openai/generateBotResponse"
 import { useEffect, useState } from "react"
 import { Oval } from "react-loader-spinner";
+import { useSelector } from "react-redux";
 
 interface ChatbotInterface {
   context: string,
@@ -11,9 +13,10 @@ interface ChatbotInterface {
 export default function Chatbot({ context, search, matchScore }: ChatbotInterface) {
   const [botResponse, setBotResponse] = useState('');
   const [loading, setLoading] = useState(true);
+  const user = useSelector(selectUser);
 
   const generateResponse = async () => {
-    let response = await generateBotResponse({ context, search, matchScore });
+    let response = await generateBotResponse({ context, search, matchScore, openaiKey: user.openaiKey });
     if (!response) {
       response = 'Something went wrong. Could not generate response';
     }
