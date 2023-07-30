@@ -31,8 +31,8 @@ const Pricing = () => {
             planType="starter"
             id="lite"
           >
-            <OfferList text={`${user.configs.plans?.lite?.projectLimit} project`} status="active" />
-            <OfferList text={`${user.configs.plans?.lite?.vectorLimit} vectors total`} status="active" />
+            <OfferList text={`${user.configs?.plans?.lite?.projectLimit} project`} status="active" />
+            <OfferList text={`${user.configs?.plans?.lite?.vectorLimit} vectors total`} status="active" />
             <OfferList text="Email support" status="active" />
             <OfferList text="Discord channel" status="active" />
             <OfferList text="Test with chatbot" status="active" />
@@ -45,8 +45,8 @@ const Pricing = () => {
             planType="starter"
             id="basic"
           >
-            <OfferList text={`${user.configs.plans?.basic?.projectLimit} projects`} status="active" />
-            <OfferList text={`${user.configs.plans?.basic?.vectorLimit} vectors total`} status="active" />
+            <OfferList text={`${user.configs?.plans?.basic?.projectLimit} projects`} status="active" />
+            <OfferList text={`${user.configs?.plans?.basic?.vectorLimit} vectors total`} status="active" />
             <OfferList text="Email support" status="active" />
             <OfferList text="Discord channel" status="active" />
             <OfferList text="Test with chatbot" status="active" />
