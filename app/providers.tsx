@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 import store from "@/redux/store";
 import Startup from "./startup";
 import 'react-toastify/dist/ReactToastify.css';
-
+import { Analytics } from '@vercel/analytics/react';
 
 export function Providers({ children }: any) {
   const [supabaseClient] = useState(() => createPagesBrowserClient());
@@ -16,11 +16,12 @@ export function Providers({ children }: any) {
     <SessionContextProvider supabaseClient={supabaseClient}>
       <Provider store={store}>
         <Startup>
+          <Analytics />
           <ThemeProvider attribute="class" enableSystem={true} defaultTheme="light">
                 {children}
           </ThemeProvider>
         </Startup>
-        </Provider>
+      </Provider>
     </SessionContextProvider>
     
   );
