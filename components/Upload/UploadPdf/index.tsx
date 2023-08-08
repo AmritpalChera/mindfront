@@ -15,6 +15,7 @@ export default function UploadPdf({ setUploadType }) {
   const backend = useUserBackendForm();
   const params = useSearchParams();
   const [project, setProject] = useState(params.get('project') || '');
+  const [collection, setCollection] = useState(params.get('collection') || '');
   const router = useRouter();
   const [error, setError] = useState('');
 
@@ -73,7 +74,7 @@ export default function UploadPdf({ setUploadType }) {
             onClick={() => { }}
             className={`rounded-md w-full text-center relative flex items-center justify-center ease-in-out ${file? 'bg-green-700' : 'bg-red '} py-2 h-9  mt-4 px-8 text-base font-semibold text-white duration-300 ease-in-out cursor-pointer`}
         >
-          <input accept=".pdf" onChange={onChangeHandler} type="file" className="w-full opacity-0 cursor-pointer h-fully left-0 top-0 absolute bg-blue-400" />
+          <input accept=".pdf" onChange={onChangeHandler} type="file" className="w-full text-black opacity-0 cursor-pointer h-fully left-0 top-0 absolute bg-blue-400" />
           <div>Upload PDF</div>
           </div>
         <div className="text-sm mt-2"><span className=" text-primary font-bold">Uploaded file:</span> {file?.name}</div>
@@ -81,16 +82,16 @@ export default function UploadPdf({ setUploadType }) {
           <div className="mt-6 w-full">
             <p className="font-bold text-primary flex justify-between">Metadata <span className="text-gray-500 text-sm ml-4">Optional</span></p>
             <div></div>
-            <input name="metadata" className="w-full border-gray rounded-lg mt-2 shadow-md" placeholder="erasers: 3, pens: 12, stocked: 'July 23'..."/>
+            <input name="metadata" className="w-full text-black  border-gray rounded-lg mt-2 shadow-md" placeholder="erasers: 3, pens: 12, stocked: 'July 23'..."/>
             <div className="text-gray-500 text-sm mt-2">Enter item: value seperated by a comma</div>
           </div>
           <div className="mt-6 w-full">
             <p className="font-bold text-primary">Collection Name</p>
-            <input name="collection" className="w-full border-gray rounded-lg mt-2 shadow-md" placeholder="OfficeSupplies..."/>
+            <input name="collection" value={collection} onChange={(e) => setCollection(e.target.value)} className="w-full border-gray text-black  rounded-lg mt-2 shadow-md" placeholder="OfficeSupplies..."/>
           </div>
           <div className="mt-6 w-full">
             <p className="font-bold text-primary">Project Name</p>
-            <input value={project} onChange={(e) => setProject(e.target.value)}  name="project" className="w-full border-gray rounded-lg mt-2 shadow-md" placeholder="Walmart..." />
+            <input value={project} onChange={(e) => setProject(e.target.value)}  name="project" className="w-full text-black  border-gray rounded-lg mt-2 shadow-md" placeholder="Walmart..." />
           </div>
           {error && <p className="text-red font-bold text-center my-3">{error}</p>}
           <div className="flex justify-center w-full">

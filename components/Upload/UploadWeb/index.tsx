@@ -73,7 +73,7 @@ export default function UploadWeb({setUploadType}) {
           <input
             type="text"
             name="webpage"
-            className="w-full border-gray rounded-lg mt-2 shadow-md"
+            className="w-full border-gray text-black rounded-lg mt-2 shadow-md"
             placeholder="Enter Webpage URL here..."
           />
           {/* <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
@@ -84,16 +84,16 @@ export default function UploadWeb({setUploadType}) {
           <div className="mt-6 w-full">
             <p className="font-bold text-primary flex justify-between">Metadata <span className="text-gray-500 text-sm ml-4">Optional</span></p>
             <div></div>
-            <input name="metadata" className="w-full border-gray rounded-lg mt-2 shadow-md" placeholder="erasers: 3, pens: 12, stocked: 'July 23'..."/>
+            <input name="metadata" className="w-full text-black border-gray rounded-lg mt-2 shadow-md" placeholder="erasers: 3, pens: 12, stocked: 'July 23'..."/>
             <div className="text-gray-500 text-sm mt-2">Enter item: value seperated by a comma</div>
           </div>
           <div className="mt-6 w-full">
             <p className="font-bold text-primary">Collection Name</p>
-            <input value={collectionInput} onChange={(e) => setCollectionInput(e.target.value)} name="collection" className="w-full border-gray rounded-lg mt-2 shadow-md" placeholder="OfficeSupplies..."/>
+            <input value={collectionInput} onChange={(e) => setCollectionInput(e.target.value)} name="collection" className="w-full text-black border-gray rounded-lg mt-2 shadow-md" placeholder="OfficeSupplies..."/>
           </div>
           <div className="mt-6 w-full">
             <p className="font-bold text-primary">Project Name</p>
-            <input value={projectInput} onChange={(e) => setProjectInput(e.target.value)} name="project" className="w-full border-gray rounded-lg mt-2 shadow-md" placeholder="Walmart..." />
+            <input value={projectInput} onChange={(e) => setProjectInput(e.target.value)} name="project" className="w-full text-black border-gray rounded-lg mt-2 shadow-md" placeholder="Walmart..." />
           </div>
           {error && <p className="text-red font-bold text-center my-3">{error}</p>}
           <div className="flex justify-center w-full">
