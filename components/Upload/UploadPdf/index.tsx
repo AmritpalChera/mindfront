@@ -8,6 +8,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import { toast } from "react-toastify";
+import Mindplug from 'mindplug';
+
+const mindplug = new Mindplug({mindplugKey: 'e29abc3f-ba2e-43e1-bdb9-d0c38d558285' })
 
 export default function UploadPdf({ setUploadType }) {
   const [file, setFile] = useState<File | null>(null);
@@ -43,12 +46,13 @@ export default function UploadPdf({ setUploadType }) {
       data.append('type', 'pdf');
       
       try {
-        await backend.post('/data/store/file', data);
+        // await backend.post('/data/store/file', data);
+        await mindplug.storePDF({file: file, db: formProps.project, collection: formProps.collection})
         toast('Complete!');
         router.push(`/dashboard?project=${formProps.project}&collection=${formProps.collection}`)
         e.target.reset();
       } catch (e) {
-        console.log(e?.response?.data)
+        console.log(e)
         if (typeof (e?.response?.data?.error) === 'string') setError(e?.response?.data?.error);
         toast.error('Process failed. Try again')
       }
