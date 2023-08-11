@@ -2933,10 +2933,10 @@ mimic-fn@^4.0.0:
   resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-4.0.0.tgz#60a90550d5cb0b239cca65d893b1a53b29871ecc"
   integrity sha512-vqiC06CuhBTUdZH+RYl8sFrL096vA45Ok5ISO6sE/Mr1jRbGH4Csnhi8f3wKVl7x8mO4Au7Ir9D3Oyv1VYMFJw==
 
-mindplug@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/mindplug/-/mindplug-1.0.2.tgz#aa5694c233cb9d0dfa6f72aed5f47c4f369d673b"
-  integrity sha512-xa2Ldz4ccfzRmchV8r2YQpvRPhP672SNZzvGidMkNf7nc/S3p78YcmQAmu0gaVQRolunW9f5hFQp4h3dvkP7KA==
+mindplug@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/mindplug/-/mindplug-1.0.7.tgz#bc1bc15e1e58cee45b7b415b6384c0cea63ad35e"
+  integrity sha512-m+IWlqyXbHH9MRJZd1UYUsx7CUlNNOEzuZGfcVP13tAwskH9v9oBWv50hXoJ374+t7BFlD1N81Sb27wVh0e6cw==
   dependencies:
     axios "^1.4.0"
     bottleneck "^2.19.5"
