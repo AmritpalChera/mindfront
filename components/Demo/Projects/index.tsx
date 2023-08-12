@@ -53,7 +53,7 @@ export default function ProjectsDemo() {
       <div className="flex flex-wrap-reverse items-center justify-around md:px-24 mt-24 gap-12">
         <div className=" mt-12 max-w-4xl flex p-4 md:p-12 coolBlueGradient justify-center rounded-2xl">
           <Image
-            src="/images/landingpage/projects.jpg"
+            src="/images/landingpage/formats.jpg"
             alt="fetch-image"
             height={2048}
             width={2048}
