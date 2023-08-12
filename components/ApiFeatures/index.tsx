@@ -56,7 +56,7 @@ export default function ApiFeatures() {
             <ClipboardIcon onClick={copyAPIkey}  className="w-4 h-4 cursor-pointer dark:text-black"/>
           </div>
         </div>
-        <p onClick={()=>window.open('https://docs.mindplug.io', '_blank', 'noopener, noreferrer')} className="font-bold text-xl bg-primary text-white py-2 px-6 rounded-xl hover:bg-primary/80 cursor-pointer">View Documentation</p>
+        <p onClick={()=>window.open('https://docs.mindplug.io/javascript-sdk', '_blank', 'noopener, noreferrer')} className="font-bold text-xl bg-primary text-white py-2 px-6 rounded-xl hover:bg-primary/80 cursor-pointer">View Documentation</p>
 
       </div>
     )

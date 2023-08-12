@@ -44,7 +44,7 @@ export default function Navbar({activeTab}) {
   const teams = [
     { id: '1', name: 'Customer Support', href: 'https://forms.gle/GNX5pbWPAziEFU9U7', initial: 'C', current: activeTab === '1' },
     { id: '2', name: 'Feedback', href: 'https://forms.gle/zxWEff4EFyoQ76Pf7', initial: 'F', current: activeTab === '2' },
-    { id: '3', name: 'Message Founder', href: 'https://twitter.com/AwesomAmri', initial: 'M', current: activeTab === '3' },
+    { id: '3', name: 'Get help', href: 'https://calendly.com/cheraamritpal/30min', initial: 'G', current: activeTab === '3' },
   ]
 
   
@@ -261,7 +261,7 @@ export default function Navbar({activeTab}) {
                     ))}
                   </ul>
                 </li>
-                <li className="-mx-6 mt-auto">
+                {/* <li className="-mx-6 mt-auto">
                   <a
                   href="https://twitter.com/AwesomAmri"
                   target='blank'
@@ -276,13 +276,13 @@ export default function Navbar({activeTab}) {
                     <span className="sr-only">Your profile</span>
                     <span aria-hidden="true">Amritpal</span>
                   </a>
-                </li>
+                </li> */}
               </ul>
             </nav>
           </div>
         </div>
 
-        <div className="sticky top-0 z-40 flex items-center gap-x-6 bg-white dark:bg-[#000] px-4 py-4 shadow-sm sm:px-6 lg:hidden">
+        {/* <div className="sticky top-0 z-40 flex items-center gap-x-6 bg-white dark:bg-[#000] px-4 py-4 shadow-sm sm:px-6 lg:hidden">
           <button type="button" className="-m-2.5 p-2.5  lg:hidden" onClick={() => setSidebarOpen(true)}>
             <span className="sr-only">Open sidebar</span>
             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
@@ -297,7 +297,7 @@ export default function Navbar({activeTab}) {
               alt=""
             />
           </a>
-        </div>
+        </div> */}
     </>
   )
 }

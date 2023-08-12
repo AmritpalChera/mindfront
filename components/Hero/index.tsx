@@ -33,7 +33,7 @@ const Hero = () => {
                 </p>
                 <div className="flex flex-col space-y-4 mt-24 sm:flex-row sm:space-x-4 sm:space-y-0">
                   <Link
-                    href={'https://calendly.com/cheraamritpal/30min'}
+                    href={'/dashboard'}
                     target="blank"
                     className="rounded-md text-center bg-primary py-4 px-8 text-base  font-semibold text-white duration-300 ease-in-out hover:bg-primary/80 cursor-pointer"
                   >
@@ -47,7 +47,9 @@ const Hero = () => {
                     Documentation
                   </Link>
                 </div>
-                
+                <div className="mt-4">
+                  <Link href="https://calendly.com/cheraamritpal/30min" target="blank" className=" text-primary">Book a demo</Link>
+                </div>
               </div>
               
             </div>

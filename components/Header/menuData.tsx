@@ -9,7 +9,7 @@ const menuData = [
   {
     id: 3,
     title: "Documentation",
-    path: "https://info-153.gitbook.io/mindplug/",
+    path: "https://docs.mindplug.io/javascript-sdk",
     newTab: true,
   },
   // {
@@ -44,11 +44,11 @@ const menuData = [
       
   //   ],
   // },
-  // {
-  //   id: 43,
-  //   title: "Dashboard",
-  //   path: "/dashboard",
-  //   newTab: false,
-  // },
+  {
+    id: 43,
+    title: "Dashboard",
+    path: "/dashboard",
+    newTab: false,
+  },
 ];
 export default menuData;

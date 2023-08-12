@@ -70,12 +70,15 @@ export default function ProjectsDemo() {
       </div>
      
       <Link
-        href={'https://calendly.com/cheraamritpal/30min'}
+        href={'/dashboard'}
         target="blank"
         className="rounded-md mt-48 text-center bg-primary py-4 px-8 text-base w-64 md:w-96 font-semibold text-white duration-300 ease-in-out hover:bg-primary/80 cursor-pointer"
       >
         Get Early Access!
       </Link>
+      <div className="text-primary mt-4">
+        <Link target="blank" href="https://calendly.com/cheraamritpal/30min">Book a demo</Link>
+      </div>
     </div>
   )
 }
