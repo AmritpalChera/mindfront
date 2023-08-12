@@ -26,15 +26,16 @@ export default function ProjectsDemo() {
             className="mx-auto w-full h-full"
           />
         </div>
-        <div className="max-w-3xl">
+        <div className="text-center">
           <p className="md:leading-snug  md:text-8xl mt-24 max-w-6xl text-4xl text-secondary dark:text-primary font-bold">Organized projects</p>
+          <p className="text-gray-600 text-4xl mt-8">Parse through different collections and dbs</p>
         </div>
         
         
       </div>
 
       <div className="flex flex-wrap items-center justify-around md:px-24 mt-24 gap-12">
-        <div className="max-w-3xl">
+        <div className="text-center">
           <p className="md:leading-snug  md:text-8xl mt-24 max-w-6xl text-4xl text-secondary dark:text-primary font-bold">Filtered data</p>
           <p className="text-gray-600 text-4xl mt-8">Manage what your AI knows</p>
         </div>
@@ -60,7 +61,7 @@ export default function ProjectsDemo() {
             className="mx-auto w-full h-full"
           />
         </div>
-        <div className="max-w-3xl">
+        <div className="text-center">
           <p className="md:leading-snug  md:text-8xl mt-24 max-w-6xl text-4xl text-secondary dark:text-primary font-bold">Multiple formats</p>
           <p className="text-gray-600 text-4xl mt-8">PDFs | Text | Audio | URLs</p>
         </div>
