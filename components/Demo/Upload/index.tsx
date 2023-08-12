@@ -1,33 +1,30 @@
 import { Bars3Icon, CalendarIcon, ChevronRightIcon, DocumentTextIcon, GlobeAltIcon, SpeakerWaveIcon } from "@heroicons/react/24/outline"
+import Image from "next/image";
 
 const items = [
   {
-    name: 'Upload Text',
-    description: 'Copy and paste text into a textbox to upload',
+    name: 'Initialize',
+    description: '3 lines of code',
     id: 'text',
     iconColor: 'bg-pink-500',
     icon: Bars3Icon,
+    image: '/images/landingpage/code1.png'
   },
   {
-    name: 'Upload PDFs',
-    description: 'Embed an entire PDF doc, limited to 20MB.',
+    name: 'Store',
+    description: '4 lines of code',
     id: 'pdf',
     iconColor: 'bg-purple-500',
     icon: DocumentTextIcon,
+    image: '/images/landingpage/store.png'
   },
   {
-    name: 'Upload Web',
-    description: 'Link a website and we will fetch the data',
+    name: 'Query',
+    description: '4 lines of code',
     id: 'webpage',
     iconColor: 'bg-blue-500',
     icon: GlobeAltIcon,
-  },
-  {
-    name: 'Upload Audio',
-    description: 'Upload any audio from songs, videos, podcasts',
-    id: 'audio',
-    iconColor: 'bg-green-500',
-    icon: SpeakerWaveIcon
+    image: '/images/landingpage/query.png'
   }
 ];
 
@@ -43,37 +40,41 @@ export default function UploadDemo() {
           {items.map((item, itemIdx) => (
             <div key={itemIdx} className="mb-24 md:mb-48">
              
-              <div className="group relative flex justify-around items-center space-x-3 py-4">
+              <div className="group relative flex flex-wrap justify-around items-center space-x-3 py-4">
               {
                 itemIdx % 2 === 0 && (
                   <div className="min-w-0 flex-1 max-w-md">
-                    <div className="xl:text-9xl md:text-8xl sm:text-4xl text-3xl font-bold">
-                        <div>
+                    <div className="">
+                        <p className="xl:text-9xl md:text-8xl text-4xl font-bold">
                         {item.name}
+                        </p>
+                        <p className="text-2xl mt-4">
+                          {item.description}
+                        </p>
                       </div>
-                    </div>
                   </div>
               )}
               <div className="flex-shrink-0">
-                <span
-                  className={classNames(item.iconColor, 'inline-flex items-center justify-center rounded-2xl')}
-                >
-                  <item.icon className="xl:w-[500px] lg:w-[400px] md:w-[300px] sm:w-[200px] w-[100px] text-white" aria-hidden="true" />
-                </span>
+               <Image className="rounded-lg xl:w-[500px] md:w-96 w-full" alt="" src={item.image} width={1028} height={1028} />
               </div>
               {
                 itemIdx % 2 === 1 && (
                   <div className="min-w-0 flex-1 max-w-md flex justify-end">
-                    <div className="xl:text-9xl md:text-8xl sm:text-4xl text-3xl font-bold">
-                        <div className="text-end">
+                    <div className="text-end ">
+                        <p className="xl:text-9xl md:text-8xl text-4xl font-bold">
                         {item.name}
+                        </p>
+                        <p className="text-2xl mt-4">
+                          {item.description}
+                        </p>
                       </div>
-                    </div>
+                      
                   </div>
               )}
             </div>
           </div>
-        ))}
+          ))}
+
       </div>
       
   </div>

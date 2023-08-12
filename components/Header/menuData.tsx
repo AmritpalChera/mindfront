@@ -1,10 +1,10 @@
 const menuData = [
-  {
-    id: 1,
-    title: "Pricing",
-    path: "/pricing",
-    newTab: false,
-  },
+  // {
+  //   id: 1,
+  //   title: "Pricing",
+  //   path: "/pricing",
+  //   newTab: false,
+  // },
 
   {
     id: 3,
@@ -44,11 +44,11 @@ const menuData = [
       
   //   ],
   // },
-  {
-    id: 43,
-    title: "Dashboard",
-    path: "/dashboard",
-    newTab: false,
-  },
+  // {
+  //   id: 43,
+  //   title: "Dashboard",
+  //   path: "/dashboard",
+  //   newTab: false,
+  // },
 ];
 export default menuData;

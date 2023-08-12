@@ -24,37 +24,34 @@ const Hero = () => {
                 className="wow fadeInUp mx-auto pb-12 pt-20"
                 data-wow-delay=".2s"
               >
-                <p className="xl:text-6xl lg:text-5xl text-3xl pb-4 text-primary">Make it smart 🧠</p>
-                <h1 className="mb-5 text-6xl xl:text-9xl md:text-8xl font-semibold leading-tight text-secondary dark:text-white sm:leading-tight  md:leading-tight">
-                  Virtual Brain Interface
+                <p className="lg:text-5xl text-3xl pb-4 text-primary">Make it smart</p>
+                <h1 className="mb-5 text-5xl md:text-7xl xl:text-8xl font-semibold leading-tight text-secondary dark:text-white sm:leading-tight  md:leading-tight">
+                  Embeddings in 4 lines
                 </h1>
                 <p className="mb-12 hidden text-base mt-4 font-medium !leading-relaxed text-secondary dark:text-white dark:opacity-90 sm:text-xl md:text-4xl">
                    <br /> We take text, PDFs, webpages, audio and output searchble text!
                 </p>
-                <div className="flex flex-col justify-center space-y-4 mt-24 md:md-32 sm:flex-row sm:space-x-4 sm:space-y-0">
-                  <div
-                    onClick={()=>router.push(user.id? '/dashboard': '/signin')}
-                    className="rounded-md text-center bg-primary py-4 px-8 text-base w-64 md:w-96 font-semibold text-white duration-300 ease-in-out hover:bg-primary/80 cursor-pointer"
+                <div className="flex flex-col space-y-4 mt-24 sm:flex-row sm:space-x-4 sm:space-y-0">
+                  <Link
+                    href={'https://calendly.com/cheraamritpal/30min'}
+                    target="blank"
+                    className="rounded-md text-center bg-primary py-4 px-8 text-base  font-semibold text-white duration-300 ease-in-out hover:bg-primary/80 cursor-pointer"
                   >
-                    Get Started!
-                  </div>
-                  {/* <Link
-                    href="https://github.com/NextJSTemplates/startup-nextjs"
+                    Get Early Access
+                  </Link>
+                  <Link
+                    target="blank"
+                    href="https://docs.mindplug.io/javascript-sdk"
                     className="rounded-md text-center bg-black/20 py-4 px-8 text-base font-semibold text-black duration-300 ease-in-out hover:bg-black/30 dark:bg-white/20 dark:text-white dark:hover:bg-white/30"
                   >
                     Documentation
-                  </Link> */}
+                  </Link>
                 </div>
-                <div className="w-full flex justify-center gap-4 mt-12 text-2xl">
-                  <AiFillFilePdf color="fireBrick" />
-                  <RiPagesFill color="gray" />
-                  <TbWorld color="royalBlue" />
-                </div>
+                
               </div>
               
             </div>
-            <div className="flex justify-center w-full lg:w-fit rounded-2xl">
-              {/* <img className="rounded-2xl" src="https://image.lexica.art/full_jpg/6305ff28-b610-4f50-966e-8b6a7277e7cb" width={500} height={500} /> */}
+            {/* <div className="flex justify-center w-full lg:w-fit rounded-2xl">
               <Image
                 src="/images/landingpage/brain1.jpg"
                 alt="logo"
@@ -62,7 +59,7 @@ const Hero = () => {
                 width={500}
                 height={500}
               />
-            </div>
+            </div> */}
           </div>
         </div>
        
