@@ -1,3 +1,5 @@
+import { isNumberObject } from "util/types";
+
 export function stringToJSON(jsonString: string) {
   if (!jsonString) return {};
   try {
@@ -11,12 +13,14 @@ export function stringToJSON(jsonString: string) {
       const formattedKey = `"${key.trim()}"`;
     
       // Check if the value is a valid number
-      const formattedValue = isNaN(parseFloat(value.trim())) ? `"${value.trim()}"` : value.trim();
-    
+      const isNum = /^\d+$/.test(value.trim());
+      const formattedValue = (isNaN(parseFloat(value.trim())) || !isNum) ? `"${value.trim()}"` : value.trim();
       // Concatenate the formatted key-value pair
       output += `${formattedKey}:${formattedValue},`;
       
     });
+
+    console.log('output is: ', output);
     output = `{${output.slice(0, -1)}}`;
     
     var o = JSON.parse(`${output}`);

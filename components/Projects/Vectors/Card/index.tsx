@@ -40,7 +40,7 @@ const VectorCard = ({vector, index, handleActionClick, activeChatIndex, setActiv
         {
           metadataKeys.map((keyData, index) => {
             return (
-              <div key={keyData} className="text-sm md:text-md text-gray w-full text-ellipsis whitespace-pre overflow-clip md:overflow-auto">
+              <div key={keyData} className="text-sm md:text-md text-gray w-full mt-4 text-ellipsis whitespace-pre overflow-clip md:overflow-auto">
                 <div className="flex gap-4">
                   <div className="font-medium w-20">{keyData}: </div>
                   <div className="text-gray-500 dark:text-gray-300 whitespace-pre-wrap md:pr-12">{vector.metadata[keyData]}</div>

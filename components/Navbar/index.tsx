@@ -12,6 +12,7 @@ import {
   XMarkIcon,
   CreditCardIcon,
   Square3Stack3DIcon,
+  ChatBubbleBottomCenterTextIcon,
 } from '@heroicons/react/24/outline'
 import Link from 'next/link';
 import Image from 'next/image';
@@ -35,10 +36,12 @@ export default function Navbar({activeTab}) {
 
   const navigation = [
     { name: 'Dashboard', id: 'dashboard', icon: HomeIcon, current: activeTab === 'dashboard' },
-    { name: 'API', id: 'api', icon: ChatBubbleBottomCenterIcon, current: activeTab === 'api' },
     { name: 'New Upload', id: 'new', icon: DocumentDuplicateIcon, current: activeTab === 'new' },
+    { name: 'Chatbots' , id: 'chatbot', icon: ChatBubbleBottomCenterTextIcon, current: activeTab === 'chatbot' },
+    { name: 'API', id: 'api', icon: ChatBubbleBottomCenterIcon, current: activeTab === 'api' },
     { name: 'Profile', id: 'profile', icon: UsersIcon, current: activeTab === 'profile' },
     { name: 'Pricing', id: 'pricing', icon: CreditCardIcon, current: activeTab === 'pricing' },
+
     // { name: 'Setup Guide', id: 'guide', icon: Square3Stack3DIcon, current: activeTab === 'guide' },
   ]
   const teams = [

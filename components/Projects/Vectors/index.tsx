@@ -25,6 +25,9 @@ export default function Vectors({ activeProject, collectionName } : VectorsInter
   const [activeChatIndex, setActiveChatIndex] = useState(-1);
   const [search, setSearch] = useState('');
 
+  const [createBotModalOpen, setCreateBotModalOpen] = useState(false);
+  const [createBotLoading, setCreateBotLoading] = useState(false);
+
   const parentRef = useRef();
   const router = useRouter();
 
@@ -52,8 +55,17 @@ export default function Vectors({ activeProject, collectionName } : VectorsInter
   const createCard = () => {
     return (
       <button onClick={handleCreateVector}
+        className="w-full p-2 shadow bg-white text-black border-gray-300 hover:bg-gray-100 border flex justify-center font-bold rounded-md mt-4 max-w-5xl">
+        Add New Vectors
+      </button>
+    )
+  };
+
+  const createChatbotCard = () => {
+    return (
+      <button onClick={() => setCreateBotModalOpen(true)}
         className="w-full p-2 shadow hover:bg-primary/80 border-gray-300 border flex justify-center font-bold rounded-md mt-4 max-w-5xl bg-primary text-white">
-        Create New Vectors
+        Create Chatbot
       </button>
     )
   };
@@ -94,6 +106,27 @@ export default function Vectors({ activeProject, collectionName } : VectorsInter
     }
   }
 
+  const handleCreateChatbot = async (e) => {
+    e.preventDefault();
+    if (createBotLoading) return;
+    setCreateBotLoading(true);
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const formProps: any = Object.fromEntries(formData);
+    const { botId } = await backend.post('/chatbot/create', {
+      db: activeProject,
+      collection: collectionName,
+      name: formProps.name,
+      goal: formProps.topic
+    }).then(res => res.data);
+    setCreateBotLoading(false);
+    if (!botId) {
+      toast.error('Could not create chatbot');
+      return;
+    }
+    router.push('/chatbot')
+  }
+
 
   const handleReturn = () => {
     router.push(`/dashboard?project=${activeProject}`)
@@ -106,7 +139,9 @@ export default function Vectors({ activeProject, collectionName } : VectorsInter
         Return Home
       </div>
       <div className="text-sm text-gray mt-4">Showing {vectors.length} of {totalVector} vectors</div>
+      {createChatbotCard()}
       {createCard()}
+      
       <Filters searchValue={search} setSearch={setSearch} filtersApplied={filtersApplied} setFiltersApplied={setFilterApplied} setVectors={setVectors}  activeProject={activeProject} collectionName={collectionName}/>
      
       {
@@ -120,6 +155,30 @@ export default function Vectors({ activeProject, collectionName } : VectorsInter
             <button onClick={() => setIsDeleteModalOpen(-1)} className="border px-4 py-1 rounded-md border-gray bg-white shadow text-black cursor-pointer">Close</button>
             <button disabled={deleteLoading} onClick={handleDeleteVector} className="border px-4 py-1 w-24 flex justify-center items-center rounded-md border-gray shadow bg-red text-white cursor-pointer">{deleteLoading ? <ThreeDots width={"30px"} height={'20px'} color="white"/> : 'Delete'}</button>
           </div>
+        </div>
+      </BaseModal>}
+
+      {parentRef && <BaseModal parentElement={parentRef.current} setIsOpen={() => setCreateBotModalOpen(false)} isOpen={(createBotModalOpen)}>
+        <div className="bg-white px-6 py-8">
+          <h1 className="w-64 sm:w-96 font-bold text-xl">Create Chatbot</h1>
+          <form onSubmit={handleCreateChatbot}>
+            <div className="mt-2">
+              <p>Enter name</p>
+              <input required name="name" className="w-full border-gray text-black  rounded-lg shadow-md" placeholder="Lucy Shopkeeper"/>
+            </div>
+            <div className="mt-4">
+              <p>What is the main topic of this collection?</p>
+              <input required name="topic" className="w-full border-gray text-black  rounded-lg shadow-md" placeholder="Answers questions on shop's contents"/>
+            </div>
+            <div className="mt-8 flex justify-center">
+              <button
+                type="submit"
+                className="rounded-md w-64 text-center bg-primary py-2 px-8 text-base font-semibold text-white duration-300 ease-in-out hover:bg-primary/80 cursor-pointer"
+              >
+                Create
+              </button>
+            </div>
+          </form>
         </div>
       </BaseModal>}
     </div>

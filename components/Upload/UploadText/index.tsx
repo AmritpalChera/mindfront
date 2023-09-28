@@ -35,6 +35,7 @@ export default function UploadText({ setUploadType }) {
     const formProps: any = Object.fromEntries(formData);
   
     const isMetaJson = stringToJSON(formProps.metadata);
+    console.log('is metadata: ', isMetaJson);
     if (!isMetaJson) toast.error("Metadata invalid");
 
     else {
