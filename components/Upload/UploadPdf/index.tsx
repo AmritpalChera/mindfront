@@ -11,12 +11,14 @@ import { toast } from "react-toastify";
 import Mindplug from 'mindplug';
 import { useSelector } from "react-redux";
 import { selectUser } from "@/redux/features/UserSlice";
+import useUserBackend from "@/hooks/useUserBackend";
+import { backendFile } from "@/utils/axios/backend";
 
 
 export default function UploadPdf({ setUploadType }) {
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
-
+  const backend = useUserBackend();
   const user = useSelector(selectUser);
  
   const [mindplug] = useState(new Mindplug({mindplugKey: user.apiKey }))
@@ -51,9 +53,21 @@ export default function UploadPdf({ setUploadType }) {
       
       try {
         // await backend.post('/data/store/file', data);
-        await mindplug.storePDF({file: file, db: formProps.project, collection: formProps.collection})
+        const form = new FormData();
+        form.append('file', file);
+        const fileParsed = await backendFile.post('https://experai.ue.r.appspot.com/parse/pdf', form).then((res) => res.data);
+        console.log('parsed file is: ', fileParsed);
+        const uploadedData = await backend.post('/data/store/multi', {
+            data: fileParsed?.data,
+            collection: formProps.collection,
+            db: formProps.project,
+            chunkSize: formProps.chunkSize,
+            metadata: {}
+        }).then((res) => res.data).catch((err) => err.response.data);
+        console.log('uploaded Data: ', uploadedData);
+
         toast('Complete!');
-        router.push(`/dashboard?project=${formProps.project}&collection=${formProps.collection}`)
+        if (uploadedData) router.push(`/dashboard?project=${formProps.project}&collection=${formProps.collection}`)
         e.target.reset();
       } catch (e) {
         console.log(e)
