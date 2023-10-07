@@ -9,13 +9,17 @@ import { useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import { toast } from "react-toastify";
 import Mindplug from 'mindplug';
+import { useSelector } from "react-redux";
+import { selectUser } from "@/redux/features/UserSlice";
 
-const mindplug = new Mindplug({mindplugKey: 'e29abc3f-ba2e-43e1-bdb9-d0c38d558285' })
 
 export default function UploadPdf({ setUploadType }) {
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
-  const backend = useUserBackendForm();
+
+  const user = useSelector(selectUser);
+ 
+  const [mindplug] = useState(new Mindplug({mindplugKey: user.apiKey }))
   const params = useSearchParams();
   const [project, setProject] = useState(params.get('project') || '');
   const [collection, setCollection] = useState(params.get('collection') || '');

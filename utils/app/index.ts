@@ -20,7 +20,6 @@ export function stringToJSON(jsonString: string) {
       
     });
 
-    console.log('output is: ', output);
     output = `{${output.slice(0, -1)}}`;
     
     var o = JSON.parse(`${output}`);

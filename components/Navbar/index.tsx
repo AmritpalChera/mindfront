@@ -37,7 +37,7 @@ export default function Navbar({activeTab}) {
   const navigation = [
     { name: 'Dashboard', id: 'dashboard', icon: HomeIcon, current: activeTab === 'dashboard' },
     { name: 'New Upload', id: 'new', icon: DocumentDuplicateIcon, current: activeTab === 'new' },
-    { name: 'Chatbots' , id: 'chatbot', icon: ChatBubbleBottomCenterTextIcon, current: activeTab === 'chatbot' },
+    // { name: 'Chatbots' , id: 'chatbot', icon: ChatBubbleBottomCenterTextIcon, current: activeTab === 'chatbot' },
     { name: 'API', id: 'api', icon: ChatBubbleBottomCenterIcon, current: activeTab === 'api' },
     { name: 'Profile', id: 'profile', icon: UsersIcon, current: activeTab === 'profile' },
     { name: 'Pricing', id: 'pricing', icon: CreditCardIcon, current: activeTab === 'pricing' },
