@@ -139,7 +139,7 @@ export default function Vectors({ activeProject, collectionName } : VectorsInter
         Return Home
       </div>
       <div className="text-sm text-gray mt-4">Showing {vectors.length} of {totalVector} vectors</div>
-      {createChatbotCard()}
+      {/* {createChatbotCard()} */}
       {createCard()}
       
       <Filters searchValue={search} setSearch={setSearch} filtersApplied={filtersApplied} setFiltersApplied={setFilterApplied} setVectors={setVectors}  activeProject={activeProject} collectionName={collectionName}/>
