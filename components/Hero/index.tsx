@@ -52,7 +52,7 @@ export default function Hero() {
                       </div>
                       <div className="px-6 pb-14 pt-6 text-white whitespace-pre-wrap">
                         <span className="text-gray-300">npm install mindplug;</span>
-                        <br/> <br/>import <span className="text-yellow">Mindplug</span>  from 'mindplug';
+                        <br/> <br/>import <span className="text-yellow">Mindplug</span>  from &#39;mindplug&#39;;
                         <br/> <br/>const <span className="text-green-400">mindplug</span> = new  <span className="text-yellow">Mindplug</span> ({`{mindplugKey: <API_KEY>}`});
                         <br/> <br/><span className="text-green-400">mindplug</span>.store({`{db: 'nature', collection: 'trees', content: 'SAMPLE'}`});
                       </div>
