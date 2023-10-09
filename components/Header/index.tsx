@@ -214,7 +214,7 @@ const Header = () => {
                   Sign Out
                 </button>}
                 <div>
-                  <ThemeToggler />
+                  {/* <ThemeToggler /> */}
                 </div>
               </div>
             </div>

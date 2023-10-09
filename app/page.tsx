@@ -10,9 +10,9 @@ export default function Home() {
     <div>
       <Header />
       <Hero />
-      <UploadDemo />
+      {/* <UploadDemo /> */}
       <ProjectsDemo />
-      <PoweredBy />
+      {/* <PoweredBy /> */}
       <Footer />
     </div>
   )

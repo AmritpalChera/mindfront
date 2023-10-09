@@ -1,73 +1,74 @@
-"use client";
-import { selectUser } from "@/redux/features/UserSlice";
-import { RiPagesFill } from 'react-icons/ri';
-import { TbWorld } from 'react-icons/tb';
-import { AiFillFilePdf } from 'react-icons/ai';
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useSelector } from "react-redux";
-import Image from "next/image";
 
-const Hero = () => {
-  const router = useRouter();
-  const user = useSelector(selectUser);
 
+export default function Hero() {
   return (
-    <>
-      <section
-        className="relative z-10 overflow-hidden pt-[120px] pb-16 md:pt-[150px] md:pb-[120px] xl:pt-[180px] xl:pb-[160px] 2xl:pt-[210px] 2xl:pb-[200px]"
-      >
-        <div className="container">
-          <div className="-mx-4 flex flex-wrap items-center justify-between">
-            <div className="px-4 flex-1 flex flex-col justify-center">
-              <div
-                className="wow fadeInUp mx-auto pb-12 pt-20"
-                data-wow-delay=".2s"
-              >
-                <p className="lg:text-5xl text-3xl pb-4 text-primary">Make it smart</p>
-                <h1 className="mb-5 text-5xl md:text-7xl xl:text-8xl font-semibold leading-tight text-secondary dark:text-white sm:leading-tight  md:leading-tight">
-                  Embeddings in 4 lines
+    <div className="bg-white">
+      <div className="relative isolate overflow-hidden bg-gradient-to-b from-indigo-100/20">
+        <div className="mx-auto max-w-7xl pb-24 pt-10 sm:pb-32 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:px-8 lg:py-40">
+          <div className="px-6 lg:px-0 lg:pt-4">
+            <div className="mx-auto max-w-2xl">
+              <div className="max-w-lg">
+                <h1 className="mt-10 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+                  Semantic search in minutes
                 </h1>
-                <p className="mb-12 hidden text-base mt-4 font-medium !leading-relaxed text-secondary dark:text-white dark:opacity-90 sm:text-xl md:text-4xl">
-                   <br /> We take text, PDFs, webpages, audio and output searchble text!
+                <p className="mt-6 text-lg leading-8 text-gray-600">
+                  Integrate semantic search in 4 lines of code. Manage data easily with our built-in dashboard.
                 </p>
-                <div className="flex flex-col space-y-4 mt-24 sm:flex-row sm:space-x-4 sm:space-y-0">
-                  <Link
-                    href={'/dashboard'}
-                    target="blank"
-                    className="rounded-md text-center bg-primary py-4 px-8 text-base  font-semibold text-white duration-300 ease-in-out hover:bg-primary/80 cursor-pointer"
+                <div className="mt-10 flex items-center gap-x-6">
+                  <a
+                    href="/dashboard"
+                    className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
-                    Get Early Access
-                  </Link>
-                  <Link
-                    target="blank"
-                    href="https://docs.mindplug.io/javascript-sdk"
-                    className="rounded-md text-center bg-black/20 py-4 px-8 text-base font-semibold text-black duration-300 ease-in-out hover:bg-black/30 dark:bg-white/20 dark:text-white dark:hover:bg-white/30"
-                  >
-                    Documentation
-                  </Link>
-                </div>
-                <div className="mt-4">
-                  <Link href="https://calendly.com/cheraamritpal/30min" target="blank" className=" text-primary">Book a demo</Link>
+                    Get Started
+                  </a>
+                  <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+                    Documentation <span aria-hidden="true">→</span>
+                  </a>
                 </div>
               </div>
-              
             </div>
-            {/* <div className="flex justify-center w-full lg:w-fit rounded-2xl">
-              <Image
-                src="/images/landingpage/brain1.jpg"
-                alt="logo"
-                className=" rounded-2xl"
-                width={500}
-                height={500}
-              />
-            </div> */}
+          </div>
+          <div className="mt-20 sm:mt-24 md:mx-auto md:max-w-2xl lg:mx-0 lg:mt-0 lg:w-screen">
+            <div
+              className="absolute inset-y-0 right-1/2 -z-10 -mr-10 w-[200%] skew-x-[-30deg] bg-white shadow-xl shadow-indigo-600/10 ring-1 ring-indigo-50 md:-mr-20 lg:-mr-36"
+              aria-hidden="true"
+            />
+            <div className="shadow-lg md:rounded-3xl">
+              <div className="bg-indigo-500 [clip-path:inset(0)] md:[clip-path:inset(0_round_theme(borderRadius.3xl))]">
+                <div
+                  className="absolute -inset-y-px left-1/2 -z-10 ml-10 w-[200%] skew-x-[-30deg] bg-indigo-100 opacity-20 ring-1 ring-inset ring-white md:ml-20 lg:ml-36"
+                  aria-hidden="true"
+                />
+                <div className="relative px-6 pt-8 sm:pt-16 md:pl-16 md:pr-0">
+                  <div className="mx-auto max-w-2xl md:mx-0 md:max-w-none">
+                    <div className="w-screen overflow-hidden rounded-tl-xl bg-gray-900">
+                      <div className="flex bg-gray-800/40 ring-1 ring-white/5">
+                        <div className="-mb-px flex text-sm font-medium leading-6 text-gray-400">
+                          <div className="border-b border-r border-b-white/20 border-r-white/10 bg-white/5 px-4 py-2 text-white">
+                            Mindplug.jsx
+                          </div>
+                          <div className="border-r border-gray-600/10 px-4 py-2">App.jsx</div>
+                        </div>
+                      </div>
+                      <div className="px-6 pb-14 pt-6 text-white whitespace-pre-wrap">
+                        <span className="text-gray-300">npm install mindplug;</span>
+                        <br/> <br/>import <span className="text-yellow">Mindplug</span>  from 'mindplug';
+                        <br/> <br/>const <span className="text-green-400">mindplug</span> = new  <span className="text-yellow">Mindplug</span> ({`{mindplugKey: <API_KEY>}`});
+                        <br/> <br/><span className="text-green-400">mindplug</span>.store({`{db: 'nature', collection: 'trees', content: 'SAMPLE'}`});
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/10 md:rounded-3xl"
+                    aria-hidden="true"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-       
-      </section>
-    </>
-  );
-};
-
-export default Hero;
+        <div className="absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-white sm:h-32" />
+      </div>
+    </div>
+  )
+}

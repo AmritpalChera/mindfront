@@ -103,7 +103,7 @@ export default function Navbar({activeTab}) {
                       >
                         <Logo />
                     </Link>
-                      <ThemeToggler />
+                      {/* <ThemeToggler /> */}
                       <div className="flex w-16 justify-center">
                         <button type="button" className="-m-2.5 p-2.5" onClick={() => setSidebarOpen(false)}>
                           <span className="sr-only">Close sidebar</span>
@@ -203,7 +203,7 @@ export default function Navbar({activeTab}) {
                   className="hidden dark:block"
                 />
             </Link>
-            <ThemeToggler />
+            {/* <ThemeToggler /> */}
             </div>
             <nav className="flex flex-1 flex-col">
               <ul role="list" className="flex flex-1 flex-col gap-y-7">
