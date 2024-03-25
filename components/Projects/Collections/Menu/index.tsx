@@ -4,7 +4,7 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { ChatBubbleBottomCenterIcon, TrashIcon, ViewfinderCircleIcon } from '@heroicons/react/24/outline'
 
 const solutions = [
-  { name: 'View Vectors', description: '', id: 'vectors', icon: ViewfinderCircleIcon },
+  // { name: 'View Vectors', description: '', id: 'vectors', icon: ViewfinderCircleIcon },
   // { name: 'Test Collection', description: '', id: 'test', icon: ChatBubbleBottomCenterIcon},
   { name: 'Delete Collection', description: '', id: 'delete', icon: TrashIcon},
 ]

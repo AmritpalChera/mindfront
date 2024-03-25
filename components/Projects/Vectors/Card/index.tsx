@@ -22,7 +22,7 @@ const VectorCard = ({vector, index, handleActionClick, activeChatIndex, setActiv
   const metadataKeys = Object.keys(vector.metadata);
 
   return (
-    <div className="shadow relative border-gray-300 border dark:bg-secondary rounded-md pb-6  mt-4  w-full p-2">
+    <div className="shadow relative border-gray-300 border dark:bg-secondary rounded-md pb-6  mt-4  w-full px-4 py-4">
       <div  className="w-full justify-between flex">
         <div className="flex flex-wrap items-center gap-4">
           <p className="font-bold md:text-xl text-sm text-primary max-w-[200px] md:max-w-[400px] text-ellipsis overflow-clip whitespace-pre">Vector {index+1}</p>
@@ -41,7 +41,7 @@ const VectorCard = ({vector, index, handleActionClick, activeChatIndex, setActiv
           metadataKeys.map((keyData, index) => {
             return (
               <div key={keyData} className="text-sm md:text-md text-gray w-full mt-4 text-ellipsis whitespace-pre overflow-clip md:overflow-auto">
-                <div className="flex gap-4">
+                <div className="flex gap-6">
                   <div className="font-medium w-20">{keyData}: </div>
                   <div className="text-gray-500 dark:text-gray-300 whitespace-pre-wrap md:pr-12">{vector.metadata[keyData]}</div>
                 </div>

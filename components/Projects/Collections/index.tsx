@@ -7,6 +7,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Oval, ThreeDots } from "react-loader-spinner";
 import Vectors from "../Vectors";
 import CollectionMenu from "./Menu";
+import { TrashIcon } from "@heroicons/react/24/outline";
 
 type collectionType = {
   collection: string,
@@ -82,16 +83,27 @@ export default function Collections({ activeProject }) {
 
   const collectionCard = (collection: collectionType, index: number) => {
     return (
-      <div onClick={()=>handleActionClick('vectors', index)} key={collection.collection} className="shadow border-gray-300 border hover:shadow-md cursor-pointer rounded-md  mt-4  w-full p-2">
+      <div onClick={()=>handleActionClick('vectors', index)} key={collection.collection} className="shadow border-gray-300 border hover:shadow-md cursor-pointer rounded-md  mt-4  w-full px-8 py-4">
         <div  className="w-full justify-between flex">
           <div className="flex flex-wrap items-center gap-4">
             <p className="font-bold md:text-xl text-sm max-w-[200px] md:max-w-[400px] text-ellipsis overflow-clip whitespace-pre">{collection.collection}</p>
           </div>
-          <CollectionMenu handleActionClick={handleActionClick} index={index} />
+          {/* <CollectionMenu handleActionClick={handleActionClick} index={index} /> */}
+          <div onClick={(e) => {
+            e.stopPropagation();
+            close()
+            handleActionClick('delete', index);   
+          }} className="relative hover:text-primary hover:cursor-pointer">
+            <div className="font-semibold text-red border-red rounded flex justify-between px-4 py-2 border">
+              <span>Delete</span>
+              <TrashIcon className="h-6 w-6 " aria-hidden="true" />
+            </div>
+            {/* <p className="mt-1 text-gray-600">{item.description}</p> */}
+          </div>
         </div>
         
-        <div className="flex mt-2 md:mt-0 "> 
-          <p className=" text-gray max-w-[200px] md:w-fit text-ellipsis whitespace-pre overflow-clip md:overflow-auto">
+        <div className="flex mt-2 md:mt-0 text-gray-500"> 
+          <p className="  max-w-[200px] md:w-fit text-ellipsis whitespace-pre overflow-clip md:overflow-auto">
             {collection.totalVectors} </p> <p>vectors</p>
         </div>
        

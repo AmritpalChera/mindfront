@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 
 export default function Stats() {
   const [stats, setStats] = useState([
-    { name: 'Total Requests', stat: '-' },
+    // { name: 'Total Requests', stat: '-' },
     { name: 'Total Projects', stat: '-' },
     { name: 'Total Vectors', stat: '-' },
   ]);
@@ -22,9 +22,9 @@ export default function Stats() {
     });
 
     const _stats = [...stats];
-    _stats[0].stat = metrics?.data?.totalRequests;
-    _stats[1].stat = metrics?.data?.totalProjects;
-    _stats[2].stat = metrics?.data?.totalVectors;
+    // _stats[0].stat = metrics?.data?.totalRequests;
+    _stats[0].stat = metrics?.data?.totalProjects;
+    _stats[1].stat = metrics?.data?.totalVectors;
     setStats(_stats);
   }
 
@@ -34,10 +34,10 @@ export default function Stats() {
 
   return (
     <div>
-      <h3 className="text-base font-semibold leading-6 ">Key Metrics</h3>
-      <dl className="mt-5 max-w-6xl grid grid-cols-1 gap-5 sm:grid-cols-3">
+      {/* <h3 className="text-base font-semibold leading-6 ">Key Metrics</h3> */}
+      <dl className="flex gap-4">
         {stats.map((item) => (
-          <div key={item.name} className="overflow-hidden rounded-l px-4 py-5 shadow sm:p-6 text-white dark:text-black dark:bg-white bg-secondary rounded-xl">
+          <div key={item.name} className="overflow-hidden border px-4 py-5 shadow sm:p-6  rounded-xl">
             <dt className="truncate text-sm font-medium">{item.name}</dt>
             <dd className="mt-1 text-3xl font-semibold tracking-tight ">{item.stat}</dd>
           </div>
