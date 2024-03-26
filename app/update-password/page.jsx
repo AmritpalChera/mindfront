@@ -14,7 +14,7 @@ const SigninPage = () => {
 
   const forgotEmail = async () => {
     const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: 'http://localhost:3000/update-password',
+      redirectTo: 'http://localhost:9000/update-password',
     });
     if (error) {
       setError('For security purposes, you can only request this once every 60 seconds');

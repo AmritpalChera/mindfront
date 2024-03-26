@@ -1,1 +1,1 @@
-export const DOMAIN = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://mindplug.io'
+export const DOMAIN = process.env.NODE_ENV === 'development' ? 'http://localhost:9000' : 'https://mindplug.io'
